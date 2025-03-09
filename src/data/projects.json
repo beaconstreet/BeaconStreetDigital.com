@@ -1,0 +1,140 @@
+[
+  {
+    "id": "strange-strength",
+    "title": "Strange Strength",
+    "slug": "strange-strength",
+    "categories": ["Website", "Social"],
+    "thumbnail": "/projects/Strange/StrangeWebsite_HeroOnly.webp",
+    "description": "A comprehensive website redesign for Strange Strength, focusing on modern aesthetics and user experience.",
+    "url": "https://example.com/strange-strength",
+    "services": ["Web Design", "Development", "Digital Marketing"],
+    "assets": {
+      "website": ["/projects/Strange/StrangeWebsite_HeroOnly.webp"],
+      "video": [],
+      "digitalCampaigns": [],
+      "photography": []
+    }
+  },
+  {
+    "id": "aqualand",
+    "title": "Aqualand of the Free",
+    "slug": "aqualand",
+    "categories": ["Website", "E-commerce"],
+    "thumbnail": "/projects/Aqualand/Aqualand_portfolio.webp",
+    "description": "E-commerce website development for Aqualand of the Free, featuring a custom shopping experience.",
+    "url": "https://example.com/aqualand",
+    "services": ["E-commerce Development", "Web Design", "SEO"],
+    "assets": {
+      "website": ["/projects/Aqualand/Aqualand_portfolio.webp"],
+      "video": [],
+      "digitalCampaigns": [],
+      "photography": []
+    }
+  },
+  {
+    "id": "legion-of-fun",
+    "title": "Legion of Fun",
+    "slug": "legion-of-fun",
+    "categories": ["Website", "E-commerce"],
+    "thumbnail": "/projects/Legion of Fun/LegionOfFun_Hero_nocomp1.webp",
+    "description": "E-commerce platform for Legion of Fun, designed to showcase their unique products.",
+    "url": "https://example.com/legion-of-fun",
+    "services": ["E-commerce Development", "Web Design", "UX Design"],
+    "assets": {
+      "website": ["/projects/Legion of Fun/LegionOfFun_Hero_nocomp1.webp"],
+      "video": [],
+      "digitalCampaigns": [],
+      "photography": []
+    }
+  },
+  {
+    "id": "emily-winnie",
+    "title": "Emily Winnie Photography",
+    "slug": "emily-winnie",
+    "categories": ["Video"],
+    "thumbnail": "/projects/Emily/EmilyPhoto.webp",
+    "description": "Video production for Emily Winnie Photography, highlighting her portfolio and creative process.",
+    "url": "https://example.com/emily-winnie",
+    "services": ["Video Production", "Editing", "Content Creation"],
+    "assets": {
+      "website": [],
+      "video": ["/projects/Emily/EmilyPhoto.webp"],
+      "digitalCampaigns": [],
+      "photography": []
+    }
+  },
+  {
+    "id": "kirt-kingzett",
+    "title": "Kirt Kingzett Real Estate",
+    "slug": "kirt-kingzett",
+    "categories": ["Video", "Social", "Photography"],
+    "thumbnail": "/projects/Kirt/Kirt_Portfolio.webp",
+    "description": "Comprehensive digital presence for Kirt Kingzett Real Estate, including photography and social media management.",
+    "url": "https://example.com/kirt-kingzett",
+    "services": ["Photography", "Social Media Management", "Video Production"],
+    "assets": {
+      "website": [],
+      "video": [],
+      "digitalCampaigns": ["/projects/Kirt/Kirt_Portfolio.webp"],
+      "photography": ["/projects/Kirt/Kirt_Portfolio.webp"]
+    }
+  },
+  {
+    "id": "charles-chung",
+    "title": "Charles Chung Personal Training",
+    "slug": "charles-chung",
+    "categories": ["Video", "Photography"],
+    "thumbnail": "/projects/Charlie/CharlieFit.webp",
+    "description": "Video and photography content for Charles Chung Personal Training, showcasing fitness routines and client success stories.",
+    "url": "https://example.com/charles-chung",
+    "services": ["Video Production", "Photography", "Content Strategy"],
+    "assets": {
+      "website": [],
+      "video": ["/projects/Charlie/CharlieFit.webp"],
+      "digitalCampaigns": [],
+      "photography": ["/projects/Charlie/CharlieFit.webp"]
+    }
+  },
+  {
+    "id": "new-and-improved",
+    "title": "New and Improved",
+    "slug": "new-and-improved",
+    "categories": ["Website", "Video", "Social"],
+    "thumbnail": "/projects/New and Improved/NewAndImproved_Sarah.webp",
+    "description": "Complete digital transformation for New and Improved, including website development, video content, and social media strategy.",
+    "url": "https://example.com/new-and-improved",
+    "services": [
+      "Web Development",
+      "Video Production",
+      "Social Media Strategy"
+    ],
+    "assets": {
+      "website": ["/projects/New and Improved/NewAndImproved_Sarah.webp"],
+      "video": ["/projects/New and Improved/NewAndImproved_Sarah.webp"],
+      "digitalCampaigns": [
+        "/projects/New and Improved/NewAndImproved_Sarah.webp"
+      ],
+      "photography": []
+    }
+  },
+  {
+    "id": "meet-mardi",
+    "title": "Meet Mardi",
+    "slug": "meet-mardi",
+    "categories": ["Video", "Social"],
+    "thumbnail": "/projects/Mardi/MeetMardi.webp",
+    "description": "Video content and social media campaign for Meet Mardi, designed to increase brand awareness and engagement.",
+    "url": "https://example.com/meet-mardi",
+    "services": [
+      "Video Production",
+      "Social Media Management",
+      "Content Creation"
+    ],
+    "assets": {
+      "website": [],
+      "video": ["/projects/Mardi/MeetMardi.webp"],
+      "digitalCampaigns": ["/projects/Mardi/MeetMardi.webp"],
+      "photography": []
+    }
+  }
+]

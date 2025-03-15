@@ -7,10 +7,18 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-dosis)"],
+        dosis: ["var(--font-dosis)"],
+        caveat: ["var(--font-caveat)"],
+        knewave: ["var(--font-knewave)"],
+        montserrat: ["var(--font-montserrat)"],
+      },
       colors: {
-        primary: "#A5B4BF",
-        secondary: "#322E2B",
-        "off-white": "#F8F8F8",
+        // primary: "#f9efe7",
+        // secondary: "#555555",
+        // accent: "#fb923c",
+        // highlight: "#fb923c",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

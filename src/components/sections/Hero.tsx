@@ -27,7 +27,7 @@ export default function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* White background for the entire section */}
-      <div className="absolute inset-0 bg-white"></div>
+      <div className="absolute inset-0 primary-bg"></div>
 
       {/* Image on the right 50% with fade-in animation */}
       <motion.div
@@ -36,14 +36,15 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1.2 }}
       >
-        {/* Smaller gradient that only covers part of the image */}
-        <div className="absolute inset-y-0 left-0 w-[30%] bg-gradient-to-r from-white to-transparent z-10" />
+        {/* Gradient overlay to fade image into background */}
+        <div className="absolute inset-y-0 left-0 w-[30%] gradient-primary-to-transparent z-10" />
 
         <div className="relative h-full w-full">
           <Image
             src="/backgrounds/man-urban-cityscape.jpeg"
             alt="Urban cityscape"
             fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             style={{ objectFit: "cover" }}
             priority
           />
@@ -54,23 +55,31 @@ export default function Hero() {
       <div className="relative z-20 h-full flex flex-col justify-center px-8 md:px-16 lg:px-24 w-full md:w-1/2">
         <div className="max-w-xl">
           <FadeIn delay={0.2}>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-6">
-              I'm Matt.
+            <h1 className="text-5xl font-caveat md:text-6xl lg:text-7xl font-bold text-black mb-20">
+              Hi, I'm <span className="accent-color">Matt</span>.
             </h1>
           </FadeIn>
 
-          <FadeIn delay={0.8}>
-            <p className="text-xl md:text-2xl text-black mb-4">
-              I design and develop web experiences. I shoot and edit video
-              content.
-            </p>
+          <FadeIn delay={1}>
+            <div className="text-2xl font-normal md:text-2xl secondary-text mb-10">
+              I design and develop web experiences.
+            </div>
           </FadeIn>
 
-          <FadeIn delay={1.4}>
-            <p className="text-2xl md:text-3xl text-black">
-              Think of me as your go-to creative partner, here when you need me,
-              always working toward your success.
-            </p>
+          <FadeIn delay={1.2}>
+            <div className="text-2xl font-normal md:text-2xl secondary-text mb-10">
+              I shoot and edit compelling video content.
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={1.6}>
+            <div className="text-2xl font-normal md:text-2xl text-black">
+              Think of me as{" "}
+              <span className="accent-color font-bold">
+                your go-to creative partner.
+              </span>
+              {/* Think of me as <span className="accent-color">a one-man digital agency at your service. </span>*/}
+            </div>
           </FadeIn>
         </div>
       </div>

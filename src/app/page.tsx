@@ -5,10 +5,13 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Hero from "../components/sections/Hero";
 import Portfolio from "../components/sections/Portfolio";
 import Contact from "../components/sections/Contact";
+import ProjectLightbox from "@/components/ui/ProjectLightbox";
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
   const [windowHeight, setWindowHeight] = useState(0);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   // First transition (white to black)
   const blackOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
@@ -17,10 +20,21 @@ export default function Home() {
   const whiteOpacity = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
 
   // Create a conditional pointer-events value based on opacity
-  // This will disable pointer events when the overlay is mostly transparent
   const contactPointerEvents = useTransform(whiteOpacity, (value) =>
     value > 0.5 ? "auto" : "none"
   );
+
+  // Function to open the lightbox
+  const openLightbox = (project: any) => {
+    setSelectedProject(project);
+    setIsLightboxOpen(true);
+  };
+
+  // Function to close the lightbox
+  const closeLightbox = () => {
+    setIsLightboxOpen(false);
+    setTimeout(() => setSelectedProject(null), 300); // Clear content after animation
+  };
 
   useEffect(() => {
     setWindowHeight(window.innerHeight);
@@ -49,7 +63,7 @@ export default function Home() {
       {/* Portfolio Section - Position it absolutely and give it a higher z-index */}
       <div className="relative z-20" style={{ marginTop: windowHeight }}>
         <div className="bg-black">
-          <Portfolio />
+          <Portfolio onCardClick={openLightbox} />
         </div>
       </div>
 
@@ -74,6 +88,13 @@ export default function Home() {
       >
         <Contact />
       </motion.div>
+
+      {/* Use the ProjectLightbox component */}
+      <ProjectLightbox
+        project={selectedProject}
+        isOpen={isLightboxOpen}
+        onClose={closeLightbox}
+      />
     </div>
   );
 }

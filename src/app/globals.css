@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #fbfbf9;
   --foreground: #171717;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-dosis);
+  --font-caveat: var(--font-caveat);
+  --font-knewave: var(--font-knewave);
+  --font-montserrat: var(--font-montserrat);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +24,45 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-montserrat);
+  font-weight: 400;
+}
+
+@media (max-width: 500px) {
+  .email-shrink {
+    @apply text-lg;
+  }
+}
+
+.accent-color {
+  color: #fb923c;
+}
+
+.accent-bg {
+  background-color: #fb923c;
+}
+
+.hover-accent-color:hover {
+  color: #fb923c;
+}
+
+.hover-accent-bg:hover {
+  background-color: #fb923c;
+}
+
+.primary-color {
+  color: #f8f4f1;
+}
+
+.secondary-text {
+  color: #555555;
+}
+
+.primary-bg {
+  background-color: #f8f4f1;
+}
+
+/* Create a custom gradient class */
+.gradient-primary-to-transparent {
+  background-image: linear-gradient(to right, #f8f4f1, transparent);
 }

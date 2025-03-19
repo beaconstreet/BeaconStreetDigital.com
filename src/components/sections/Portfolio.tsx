@@ -24,14 +24,14 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
   );
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [, setIsAnimating] = useState(false);
   const [projectPositions, setProjectPositions] = useState<
     Map<string, { index: number; position: string }>
   >(new Map());
 
   const categories = ["All", "Website", "Social", "E-commerce", "Video"];
 
-  const [ref, inView] = useInView({
+  const [,] = useInView({
     triggerOnce: false,
     threshold: 0.1,
   });

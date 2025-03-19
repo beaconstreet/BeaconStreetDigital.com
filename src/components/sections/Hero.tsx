@@ -191,13 +191,6 @@ export default function Hero() {
     animateCloudsInfinitely();
   }, [windowWidth, imageHeight]);
 
-  // Calculate cloud positioning (top 1/3 of the actual image)
-  const cloudContainerStyle = {
-    height: `${imageHeight / 3}px`, // Top 1/3 of image height
-    top: 0,
-    overflow: "hidden",
-  };
-
   const scrollToPortfolio = () => {
     // Scroll to a position equal to the viewport height
     window.scrollTo({

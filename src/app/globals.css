@@ -42,6 +42,10 @@ body {
   background-color: #fb923c;
 }
 
+.accent-bg-transparent {
+  background-color: #fb923cc3;
+}
+
 .hover-accent-color:hover {
   color: #fb923c;
 }
@@ -58,11 +62,19 @@ body {
   color: #555555;
 }
 
+.secondary-bg {
+  background-color: #2e2e2e;
+}
+
 .primary-bg {
   background-color: #f8f4f1;
 }
 
+.primary-bg-transparent {
+  background-color: #f8f4f1c3;
+}
+
 /* Create a custom gradient class */
 .gradient-primary-to-transparent {
-  background-image: linear-gradient(to right, #f8f4f1, transparent);
+  background-image: linear-gradient(to right, #f8f4f1 75%, transparent 100%);
 }

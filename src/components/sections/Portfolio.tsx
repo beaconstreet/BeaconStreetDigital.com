@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import CategoryFilter from "../ui/CategoryFilter";
@@ -38,6 +38,12 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
     triggerOnce: false,
     threshold: 0.1,
   });
+
+  // Add a ref to the top of your Portfolio component
+  const portfolioTopRef = useRef<HTMLDivElement>(null);
+
+  // At the top of your component
+  const sectionRef = useRef<HTMLElement>(null);
 
   // Calculate grid positions - updated for new aspect ratio and spacing
   const getGridPosition = (index: number) => {
@@ -85,10 +91,21 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
     console.log("Portfolio mounted");
   }, []);
 
-  // Fix the category parameter type
+  // Modify your handleCategoryFilter function
   const handleCategoryFilter = (category: string) => {
     setActiveCategory(category);
-    // Your filtering logic here
+
+    // Scroll to the very top of the Portfolio section background
+    if (sectionRef.current) {
+      const yOffset =
+        sectionRef.current.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: yOffset,
+        behavior: "smooth",
+      });
+    }
+
+    // Your existing filtering logic
   };
 
   const handleOpenProject = (id: string) => {
@@ -127,20 +144,33 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
   };
 
   return (
-    <section ref={ref} className="min-h-screen bg-black text-off-white py-24">
-      <div className="mx-auto pl-4 pr-0 max-w-none">
+    <section
+      ref={sectionRef}
+      className="min-h-screen secondary-bg text-off-white py-14 md:py-24"
+    >
+      {/* Add this div at the very top of your section */}
+      <div ref={portfolioTopRef}></div>
+
+      <div className="mx-auto pr-0 max-w-none">
         {" "}
         {/* Removed right padding on md+ screens */}
+        {/* Add this code for mobile screens (outside of the hidden div) */}
+        <div className="md:hidden mb-8 px-4">
+          <h3 className="text-3xl font-montserrat font-bold mb-2 uppercase tracking-wider text-center">
+            <span className="text-gray-50">Recent</span>
+            <span className="accent-color"> Projects</span>
+          </h3>
+        </div>
         {/* Mobile view: Category filters horizontal */}
         <div className="md:hidden mb-8">
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 justify-center w-full">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => handleCategoryFilter(category)}
-                className={`py-2 px-3 transition-all duration-300 ${
+                className={`py-2 px-3 transition-all duration-300 uppercase tracking-wide ${
                   activeCategory === category
-                    ? "text-gray-300 font-medium"
+                    ? "secondary-text font-medium accent-bg-transparent rounded-b-md"
                     : "text-gray-500 hover:text-gray-300"
                 }`}
               >
@@ -153,17 +183,17 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
           {/* Left sidebar with vertical category list - 30% width */}
           <div className="hidden md:block md:w-[30%]">
             <div className="sticky top-8 pr-12 pl-12">
-              <h3 className="text-4xl font-montserrat font-bold mb-10 uppercase tracking-wider">
+              <h3 className="text-4xl md:text-2xl lg:text-4xl font-montserrat font-bold mb-10 md:mb-6 lg:mb-10 uppercase tracking-wider">
                 <span className="text-gray-50">Recent</span>
                 <span className="accent-color"> Projects</span>
               </h3>
 
-              <ul className="space-y-4">
+              <ul className="space-y-4 md:space-y-4 lg:space-y-4">
                 {categories.map((category) => (
                   <li key={category} className="relative">
                     <button
                       onClick={() => handleCategoryFilter(category)}
-                      className={`text-left text-xl font-light tracking-wide uppercase w-full py-2 group transition-all duration-300 flex items-center ${
+                      className={`text-left text-xl md:text-base lg:text-xl font-light tracking-wide md:tracking-normal uppercase w-full py-2 md:py-1 lg:py-2 group transition-all duration-300 flex items-center cursor-pointer ${
                         activeCategory === category
                           ? "text-gray-300 font-medium"
                           : "text-gray-500 hover-accent-color"
@@ -185,7 +215,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          className="ml-2 text-gray-400"
+                          className="ml-2 text-gray-400 md:w-4 md:h-4 lg:w-4 lg:h-4"
                         >
                           <line x1="5" y1="12" x2="19" y2="12"></line>
                           <polyline points="12 5 19 12 12 19"></polyline>
@@ -205,6 +235,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
                             strokeWidth="2"
                             strokeLinecap="round"
                             strokeLinejoin="round"
+                            className="md:w-4 md:h-4 lg:w-4 lg:h-4"
                             animate={{
                               x: [0, 5, 0],
                             }}
@@ -283,7 +314,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
             </div>
 
             {/* Mobile view: 1 column grid */}
-            <div className="grid grid-cols-1 gap-[5px] md:hidden">
+            <div className="grid grid-cols-1 gap-[5px] md:hidden mx-auto px-4 sm:px-6">
               {filteredProjects.map((project) => (
                 <motion.div
                   key={project.id}

@@ -1,20 +1,197 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import FadeIn from "../animations/FadeIn";
 
 export default function Hero() {
-  const [showArrow, setShowArrow] = useState(false);
+  const cloud1Ref = useRef<HTMLDivElement>(null);
+  const cloud2Ref = useRef<HTMLDivElement>(null);
+  const duplicateCloud1Ref = useRef<HTMLDivElement>(null);
+  const duplicateCloud2Ref = useRef<HTMLDivElement>(null);
+  const [imageHeight, setImageHeight] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowArrow(true);
-    }, 3000);
+    // Get initial window width
+    setWindowWidth(window.innerWidth);
+    // Set initial mobile state
+    setIsMobile(window.innerWidth < 1200); // Consider screens < 1200px as mobile
 
-    return () => clearTimeout(timer);
+    // Function to handle image load
+    const handleImageLoad = () => {
+      const img = document.querySelector(
+        ".background-image"
+      ) as HTMLImageElement;
+      if (img && img.complete) {
+        // Get actual visible height of the image
+        const aspectRatio = img.naturalHeight / img.naturalWidth;
+        const visibleHeight = window.innerWidth * aspectRatio;
+        setImageHeight(visibleHeight);
+      }
+    };
+
+    // Call once on mount
+    handleImageLoad();
+
+    // Function to handle window resize
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setWindowWidth(width);
+      setIsMobile(width < 1200); // Update mobile state on resize (now 1200px)
+      handleImageLoad();
+    };
+
+    // Add event listeners
+    window.addEventListener("resize", handleResize);
+
+    // Clean up
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
+
+  // Animation for clouds
+  useEffect(() => {
+    if (
+      !cloud1Ref.current ||
+      !cloud2Ref.current ||
+      !duplicateCloud1Ref.current ||
+      !duplicateCloud2Ref.current ||
+      !windowWidth ||
+      !imageHeight
+    )
+      return;
+
+    const cloudWidth = windowWidth * 0.3; // For cloud 1
+    const cloud2Width = windowWidth * 0.15; // For cloud 2 (smaller)
+
+    // Initialize positions - start all clouds off-screen
+    cloud1Ref.current.style.right = `300px`; // Cloud 1 starts partway on screen
+    cloud2Ref.current.style.right = `0px`; // Cloud 2 starts on screen
+    duplicateCloud1Ref.current.style.right = `-${cloudWidth}px`; // Duplicate 1 starts off-screen
+    duplicateCloud2Ref.current.style.right = `-${cloud2Width}px`; // Duplicate 2 starts off-screen
+
+    const createCloudAnimation = (element, startPos, endPos, duration) => {
+      return element.animate([{ right: startPos }, { right: endPos }], {
+        duration: duration,
+        easing: "linear",
+        fill: "forwards",
+      });
+    };
+
+    // Continuous animation approach
+    const animateCloudsInfinitely = () => {
+      // First set of animations
+      const cloud1Animation = createCloudAnimation(
+        cloud1Ref.current,
+        "300px", // Start partway on screen (as in your code)
+        `${windowWidth + cloudWidth}px`,
+        100000 // 100 seconds (matching your duration)
+      );
+
+      // Cloud 2 animation starts immediately
+      const cloud2Animation = createCloudAnimation(
+        cloud2Ref.current,
+        "0px", // Start on screen (as in your code)
+        `${windowWidth + cloud2Width}px`,
+        120000 // 120 seconds (matching your duration)
+      );
+
+      // After 30 seconds, start duplicate cloud 1
+      setTimeout(() => {
+        const duplicateCloud1Animation = createCloudAnimation(
+          duplicateCloud1Ref.current,
+          `-${cloudWidth}px`, // Start off-screen
+          `${windowWidth + cloudWidth}px`,
+          100000 // Same duration as cloud 1
+        );
+
+        // Set up continuous cycle for cloud 1
+        cloud1Animation.onfinish = () => {
+          // Reposition original cloud off-screen
+          cloud1Ref.current.style.right = `-${cloudWidth}px`;
+
+          // After duplicate finishes, start original again from off-screen
+          duplicateCloud1Animation.onfinish = () => {
+            // Start original cloud 1 from off-screen
+            createCloudAnimation(
+              cloud1Ref.current,
+              `-${cloudWidth}px`,
+              `${windowWidth + cloudWidth}px`,
+              100000
+            ).onfinish = () => {
+              // Reposition duplicate off-screen
+              duplicateCloud1Ref.current.style.right = `-${cloudWidth}px`;
+
+              // Start duplicate cloud 1 again
+              createCloudAnimation(
+                duplicateCloud1Ref.current,
+                `-${cloudWidth}px`,
+                `${windowWidth + cloudWidth}px`,
+                100000
+              ).onfinish = () => {
+                // Continue the cycle
+                animateCloudsInfinitely();
+              };
+            };
+          };
+        };
+      }, 10000); // Start duplicate after 30 seconds
+
+      // After 30 seconds, start duplicate cloud 2
+      setTimeout(() => {
+        const duplicateCloud2Animation = createCloudAnimation(
+          duplicateCloud2Ref.current,
+          `-${cloud2Width}px`, // Start off-screen
+          `${windowWidth + cloud2Width}px`,
+          120000 // Same duration as cloud 2
+        );
+
+        // Set up continuous cycle for cloud 2
+        cloud2Animation.onfinish = () => {
+          // Reposition original cloud off-screen
+          cloud2Ref.current.style.right = `-${cloud2Width}px`;
+
+          // After duplicate finishes, start original again from off-screen
+          duplicateCloud2Animation.onfinish = () => {
+            // Start original cloud 2 from off-screen
+            createCloudAnimation(
+              cloud2Ref.current,
+              `-${cloud2Width}px`,
+              `${windowWidth + cloud2Width}px`,
+              120000
+            ).onfinish = () => {
+              // Reposition duplicate off-screen
+              duplicateCloud2Ref.current.style.right = `-${cloud2Width}px`;
+
+              // Start duplicate cloud 2 again
+              createCloudAnimation(
+                duplicateCloud2Ref.current,
+                `-${cloud2Width}px`,
+                `${windowWidth + cloud2Width}px`,
+                120000
+              );
+              // Note: We don't need to set onfinish here as the main function
+              // will be called from cloud 1's cycle
+            };
+          };
+        };
+      }, 30000); // Start duplicate after 30 seconds
+    };
+
+    // Start the animation cycle
+    animateCloudsInfinitely();
+  }, [windowWidth, imageHeight]);
+
+  // Calculate cloud positioning (top 1/3 of the actual image)
+  const cloudContainerStyle = {
+    height: `${imageHeight / 3}px`, // Top 1/3 of image height
+    top: 0,
+    overflow: "hidden",
+  };
 
   const scrollToPortfolio = () => {
     // Scroll to a position equal to the viewport height
@@ -25,72 +202,240 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
-      {/* White background for the entire section */}
-      <div className="absolute inset-0 primary-bg"></div>
-
-      {/* Image on the right 50% with fade-in animation */}
-      <motion.div
-        className="absolute top-0 right-0 w-1/2 h-full"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.2 }}
+    <div
+      className={`relative ${
+        isMobile ? "flex flex-col" : "min-h-screen flex items-center"
+      }`}
+    >
+      {/* Background image */}
+      <div
+        className={`${
+          isMobile ? "relative h-[50vh]" : "absolute inset-0"
+        } z-0 overflow-hidden`}
       >
-        {/* Gradient overlay to fade image into background */}
-        <div className="absolute inset-y-0 left-0 w-[30%] gradient-primary-to-transparent z-10" />
+        <Image
+          src="/backgrounds/Man-urban-cityscape_Wide1_noClouds.png"
+          alt="Man in urban cityscape with a Beacon Street billboard behind him"
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover background-image"
+          style={{
+            objectPosition: isMobile ? "100% 0%" : "90% 0%", // Right-aligned
+            objectFit: "cover",
+            transform: isMobile ? "scale(1.2)" : "none", // Zoom in for mobile
+            transformOrigin: "right top", // Scale from the right side
+          }}
+        />
 
-        <div className="relative h-full w-full">
-          <Image
-            src="/backgrounds/man-urban-cityscape.jpeg"
-            alt="Urban cityscape"
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            style={{ objectFit: "cover" }}
-            priority
-          />
-        </div>
-      </motion.div>
+        {/* Cloud container - positioned absolutely at the top of the actual image */}
+        <div
+          className="absolute left-0 right-0 top-0 z-20 pointer-events-none overflow-hidden"
+          style={{ height: "20%" }}
+        >
+          {/* Cloud 1 */}
+          <div
+            ref={cloud1Ref}
+            className="absolute"
+            style={{
+              height: "100%",
+              width: "30%", // Adjust based on cloud size
+              top: "0%", // At the very top
+            }}
+          >
+            <Image
+              src="/backgrounds/cloud1.png"
+              alt="Cloud"
+              fill
+              sizes="30vw"
+              className="object-contain"
+            />
+          </div>
 
-      {/* Hero content on the left */}
-      <div className="relative z-20 h-full flex flex-col justify-center px-8 md:px-16 lg:px-24 w-full md:w-1/2">
-        <div className="max-w-xl">
-          <FadeIn delay={0.2}>
-            <h1 className="text-5xl font-caveat md:text-6xl lg:text-7xl font-bold text-black mb-20">
-              Hi, I'm <span className="accent-color">Matt</span>.
-            </h1>
-          </FadeIn>
+          {/* Duplicate Cloud 1 */}
+          <div
+            ref={duplicateCloud1Ref}
+            className="absolute"
+            style={{
+              height: "100%",
+              width: "30%",
+              top: "0%",
+            }}
+          >
+            <Image
+              src="/backgrounds/cloud1.png"
+              alt="Cloud"
+              fill
+              sizes="30vw"
+              className="object-contain"
+            />
+          </div>
 
-          <FadeIn delay={1}>
-            <div className="text-2xl font-normal md:text-2xl secondary-text mb-10">
-              I design and develop web experiences.
-            </div>
-          </FadeIn>
+          {/* Cloud 2 - smaller size */}
+          <div
+            ref={cloud2Ref}
+            className="absolute"
+            style={{
+              height: "60%", // 80% of the container height (smaller)
+              width: "15%", // 20% of window width (smaller than cloud 1)
+              top: "8%", // Just slightly lower than cloud 1
+            }}
+          >
+            <Image
+              src="/backgrounds/cloud2.png"
+              alt="Cloud"
+              fill
+              sizes="20vw" // Updated to match new width
+              className="object-contain"
+            />
+          </div>
 
-          <FadeIn delay={1.2}>
-            <div className="text-2xl font-normal md:text-2xl secondary-text mb-10">
-              I shoot and edit compelling video content.
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={1.6}>
-            <div className="text-2xl font-normal md:text-2xl text-black">
-              Think of me as{" "}
-              <span className="accent-color font-bold">
-                your go-to creative partner.
-              </span>
-              {/* Think of me as <span className="accent-color">a one-man digital agency at your service. </span>*/}
-            </div>
-          </FadeIn>
+          {/* Duplicate Cloud 2 - also smaller */}
+          <div
+            ref={duplicateCloud2Ref}
+            className="absolute"
+            style={{
+              height: "60%", // Match original cloud 2
+              width: "15%", // Match original cloud 2
+              top: "8%",
+            }}
+          >
+            <Image
+              src="/backgrounds/cloud2.png"
+              alt="Cloud"
+              fill
+              sizes="20vw" // Updated to match new width
+              className="object-contain"
+            />
+          </div>
         </div>
       </div>
 
-      {/* Clickable scroll indicator with hover effect */}
+      {/* White overlay - left side (desktop only) or full width (mobile) */}
+      {!isMobile ? (
+        <div className="absolute inset-y-0 left-0 w-[50%] z-20 primary-bg" />
+      ) : null}
+
+      {/* Content container */}
+      <div
+        className={`
+          ${
+            isMobile
+              ? "relative w-full z-40 primary-bg flex items-center justify-center"
+              : "absolute left-0 w-full z-40"
+          }
+        `}
+        style={{
+          height: isMobile ? "50vh" : "auto",
+        }}
+      >
+        <div
+          className={`relative ${
+            isMobile ? "h-full flex items-center" : "w-full"
+          }`}
+        >
+          {/* Content positioning */}
+          <div
+            className={`
+              ${
+                isMobile
+                  ? "relative w-full text-center px-6"
+                  : "relative left-1/4 transform -translate-x-1/2 px-4 sm:px-6 md:px-8"
+              }
+            `}
+            style={{
+              maxWidth: isMobile ? "100%" : "clamp(280px, 90%, 700px)",
+              width: isMobile ? "100%" : "45%",
+              wordWrap: "break-word",
+              overflowWrap: "break-word",
+            }}
+          >
+            <FadeIn delay={0.2}>
+              <h1
+                className="font-caveat font-bold text-black mb-8"
+                style={{
+                  fontSize: isMobile
+                    ? `clamp(2.5rem, ${windowWidth * 0.08}px, 4rem)`
+                    : `clamp(2.5rem, ${windowWidth * 0.05}px, 8rem)`,
+                  marginBottom: isMobile
+                    ? `clamp(4rem, ${windowWidth * 0.01}px, 4.5rem)`
+                    : `clamp(5rem, ${windowWidth * 0.015}px, 5.5rem)`,
+                  lineHeight: 1.2,
+                  hyphens: "auto",
+                }}
+              >
+                Hi, I'm <span className="accent-color">Matt</span>.
+              </h1>
+            </FadeIn>
+
+            <FadeIn delay={1}>
+              <div
+                className="secondary-text mb-8"
+                style={{
+                  fontSize: isMobile
+                    ? `clamp(1rem, ${windowWidth * 0.035}px, 1.5rem)` // font size for mobile
+                    : `clamp(1rem, ${windowWidth * 0.026}px, 1.7rem)`, // font size for desktop
+                  marginBottom: isMobile
+                    ? `clamp(2rem, ${windowWidth * 0.01}px, 2.5rem)` // margin bottom for mobile
+                    : `clamp(3rem, ${windowWidth * 0.015}px, 3.5rem)`, // margin bottom for desktop
+                  lineHeight: 1.4,
+                  hyphens: "none",
+                }}
+              >
+                I design and develop digital experiences.
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={1.2}>
+              <div
+                className="secondary-text mb-8"
+                style={{
+                  fontSize: isMobile
+                    ? `clamp(1rem, ${windowWidth * 0.035}px, 1.5rem)`
+                    : `clamp(1rem, ${windowWidth * 0.026}px, 1.7rem)`,
+                  marginBottom: isMobile
+                    ? `clamp(2rem, ${windowWidth * 0.01}px, 2.5rem)`
+                    : `clamp(3rem, ${windowWidth * 0.015}px, 3.5rem)`,
+                  lineHeight: 1.4,
+                  hyphens: "none",
+                }}
+              >
+                I produce compelling video content.
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={1.6}>
+              <div
+                className="secondary-text"
+                style={{
+                  fontSize: isMobile
+                    ? `clamp(1rem, ${windowWidth * 0.035}px, 1.5rem)`
+                    : `clamp(1rem, ${windowWidth * 0.026}px, 1.7rem)`,
+                  lineHeight: 1.4,
+                  hyphens: "none",
+                }}
+              >
+                Think of me as{" "}
+                <span className="accent-color font-semibold">
+                  a one-man digital agency.
+                </span>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </div>
+
+      {/* Clickable scroll indicator (arrow) - show on both mobile and desktop */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer"
+        className={`${
+          isMobile
+            ? "absolute bottom-4 left-1/2 transform -translate-x-1/2 z-50 cursor-pointer"
+            : "absolute bottom-8 left-1/4 transform -translate-x-1/2 z-20 cursor-pointer"
+        }`}
         initial={{ opacity: 0 }}
         animate={{
-          opacity: showArrow ? 1 : 0,
-          y: showArrow ? [0, 10, 0] : 0,
+          opacity: 1,
+          y: [0, 10, 0],
         }}
         transition={{
           opacity: { duration: 0.5 },
@@ -101,8 +446,8 @@ export default function Hero() {
         whileTap={{ scale: 0.9 }}
       >
         <svg
-          width="40"
-          height="40"
+          width={isMobile ? "38" : "60"}
+          height={isMobile ? "38" : "60"}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -114,6 +459,6 @@ export default function Hero() {
           <path d="M12 5v14M5 12l7 7 7-7" />
         </svg>
       </motion.div>
-    </section>
+    </div>
   );
 }

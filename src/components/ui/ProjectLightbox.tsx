@@ -1,7 +1,6 @@
 "use client";
 
-import React, { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
+import React from "react";
 import Image from "next/image";
 import { Project } from "../../lib/projects";
 import { motion } from "framer-motion";

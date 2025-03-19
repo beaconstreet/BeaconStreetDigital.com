@@ -3,12 +3,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import CategoryFilter from "../ui/CategoryFilter";
-import ProjectCard from "../ui/ProjectCard";
 import ProjectLightbox from "@/components/ui/ProjectLightbox";
 import {
   getAllProjects,
-  getCategories,
   getProjectById,
   filterProjectsByCategory,
   Project,
@@ -16,7 +13,7 @@ import {
 
 // Add type for the component props
 interface PortfolioProps {
-  onCardClick: (project: any) => void; // Replace 'any' with your project type if available
+  onCardClick: (project: Project) => void; // Replace any with Project
 }
 
 // Add the type to your component
@@ -130,9 +127,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
   };
 
   // Fix the item parameter type
-  const handleItemClick = (item: any) => {
-    // Replace 'any' with your item type if available
-    // Pass the entire item object to the openLightbox function
+  const handleItemClick = (item: Project) => {
     onCardClick(item);
   };
 

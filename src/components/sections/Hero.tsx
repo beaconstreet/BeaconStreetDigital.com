@@ -74,7 +74,12 @@ export default function Hero() {
     duplicateCloud1Ref.current.style.right = `-${cloudWidth}px`; // Duplicate 1 starts off-screen
     duplicateCloud2Ref.current.style.right = `-${cloud2Width}px`; // Duplicate 2 starts off-screen
 
-    const createCloudAnimation = (element, startPos, endPos, duration) => {
+    const createCloudAnimation = (
+      element: HTMLDivElement,
+      startPos: string,
+      endPos: string,
+      duration: number
+    ) => {
       return element.animate([{ right: startPos }, { right: endPos }], {
         duration: duration,
         easing: "linear",
@@ -86,49 +91,49 @@ export default function Hero() {
     const animateCloudsInfinitely = () => {
       // First set of animations
       const cloud1Animation = createCloudAnimation(
-        cloud1Ref.current,
-        "300px", // Start partway on screen (as in your code)
+        cloud1Ref.current!,
+        "300px",
         `${windowWidth + cloudWidth}px`,
-        100000 // 100 seconds (matching your duration)
+        100000
       );
 
       // Cloud 2 animation starts immediately
       const cloud2Animation = createCloudAnimation(
-        cloud2Ref.current,
-        "0px", // Start on screen (as in your code)
+        cloud2Ref.current!,
+        "0px",
         `${windowWidth + cloud2Width}px`,
-        120000 // 120 seconds (matching your duration)
+        120000
       );
 
       // After 30 seconds, start duplicate cloud 1
       setTimeout(() => {
         const duplicateCloud1Animation = createCloudAnimation(
-          duplicateCloud1Ref.current,
-          `-${cloudWidth}px`, // Start off-screen
+          duplicateCloud1Ref.current!,
+          `-${cloudWidth}px`,
           `${windowWidth + cloudWidth}px`,
-          100000 // Same duration as cloud 1
+          100000
         );
 
         // Set up continuous cycle for cloud 1
         cloud1Animation.onfinish = () => {
           // Reposition original cloud off-screen
-          cloud1Ref.current.style.right = `-${cloudWidth}px`;
+          cloud1Ref.current!.style.right = `-${cloudWidth}px`;
 
           // After duplicate finishes, start original again from off-screen
           duplicateCloud1Animation.onfinish = () => {
             // Start original cloud 1 from off-screen
             createCloudAnimation(
-              cloud1Ref.current,
+              cloud1Ref.current!,
               `-${cloudWidth}px`,
               `${windowWidth + cloudWidth}px`,
               100000
             ).onfinish = () => {
               // Reposition duplicate off-screen
-              duplicateCloud1Ref.current.style.right = `-${cloudWidth}px`;
+              duplicateCloud1Ref.current!.style.right = `-${cloudWidth}px`;
 
               // Start duplicate cloud 1 again
               createCloudAnimation(
-                duplicateCloud1Ref.current,
+                duplicateCloud1Ref.current!,
                 `-${cloudWidth}px`,
                 `${windowWidth + cloudWidth}px`,
                 100000
@@ -144,32 +149,32 @@ export default function Hero() {
       // After 30 seconds, start duplicate cloud 2
       setTimeout(() => {
         const duplicateCloud2Animation = createCloudAnimation(
-          duplicateCloud2Ref.current,
-          `-${cloud2Width}px`, // Start off-screen
+          duplicateCloud2Ref.current!,
+          `-${cloud2Width}px`,
           `${windowWidth + cloud2Width}px`,
-          120000 // Same duration as cloud 2
+          120000
         );
 
         // Set up continuous cycle for cloud 2
         cloud2Animation.onfinish = () => {
           // Reposition original cloud off-screen
-          cloud2Ref.current.style.right = `-${cloud2Width}px`;
+          cloud2Ref.current!.style.right = `-${cloud2Width}px`;
 
           // After duplicate finishes, start original again from off-screen
           duplicateCloud2Animation.onfinish = () => {
             // Start original cloud 2 from off-screen
             createCloudAnimation(
-              cloud2Ref.current,
+              cloud2Ref.current!,
               `-${cloud2Width}px`,
               `${windowWidth + cloud2Width}px`,
               120000
             ).onfinish = () => {
               // Reposition duplicate off-screen
-              duplicateCloud2Ref.current.style.right = `-${cloud2Width}px`;
+              duplicateCloud2Ref.current!.style.right = `-${cloud2Width}px`;
 
               // Start duplicate cloud 2 again
               createCloudAnimation(
-                duplicateCloud2Ref.current,
+                duplicateCloud2Ref.current!,
                 `-${cloud2Width}px`,
                 `${windowWidth + cloud2Width}px`,
                 120000

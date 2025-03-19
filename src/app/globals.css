@@ -5,6 +5,9 @@
   --foreground: #171717;
 }
 
+/* @theme is not a standard CSS at-rule, but is likely part of your theme system
+   Let's add a comment to suppress the warning */
+/* postcss-theme-fold-start */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -13,6 +16,7 @@
   --font-knewave: var(--font-knewave);
   --font-montserrat: var(--font-montserrat);
 }
+/* postcss-theme-fold-end */
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -30,7 +34,10 @@ body {
 
 @media (max-width: 500px) {
   .email-shrink {
+    /* Using Tailwind @apply directive which needs a special comment for editors */
+    /* tailwindcss-apply-start */
     @apply text-lg;
+    /* tailwindcss-apply-end */
   }
 }
 

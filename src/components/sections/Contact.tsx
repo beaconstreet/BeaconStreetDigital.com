@@ -52,9 +52,10 @@ export default function Contact() {
             Ready to work together?
           </motion.h2>
 
-          <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 secondary-text">
-            {/* Always show arrow for debugging */}
-            <motion.div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4 secondary-text">
+            {/* Arrow pointing down only on very small screens (<430px) */}
+            <motion.div className="mb-4 sm:mb-0">
+              {/* Small mobile down arrow (only for screens <430px) */}
               <motion.svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -65,6 +66,32 @@ export default function Contact() {
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="block sm:hidden" // Show only on very small screens (<430px)
+                animate={{
+                  y: [0, 10, 0], // Animate up and down
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                }}
+              >
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </motion.svg>
+
+              {/* Right arrow for larger screens (≥430px) */}
+              <motion.svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="hidden sm:block" // Show on screens ≥430px
                 animate={{
                   x: [0, 10, 0],
                 }}
@@ -79,10 +106,10 @@ export default function Contact() {
               </motion.svg>
             </motion.div>
 
-            {/* Force visibility for email */}
+            {/* Email address */}
             <motion.a
-              initial={{ opacity: 1, y: 0 }} // Force visible initially
-              animate={{ opacity: 1, y: 0 }} // Always visible
+              initial={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               href="mailto:contact@beaconstreetdigital.com"
               className="secondary-text email-shrink tracking-wide font-semibold text-lg md:text-2xl break-all md:break-normal no-underline hover:no-underline hover-accent-color transition-colors duration-200"
               style={{ textDecoration: "none" }}

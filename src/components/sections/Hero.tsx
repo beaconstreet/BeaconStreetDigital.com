@@ -362,7 +362,7 @@ export default function Hero() {
                   hyphens: "auto",
                 }}
               >
-                Hi, I'm <span className="accent-color">Matt</span>.
+                Hi, I&apos;m <span className="accent-color">Matt</span>.
               </h1>
             </FadeIn>
 

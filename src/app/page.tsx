@@ -5,13 +5,14 @@ import Hero from "../components/sections/Hero";
 import Portfolio from "../components/sections/Portfolio";
 import Contact from "../components/sections/Contact";
 import ProjectLightbox from "@/components/ui/ProjectLightbox";
+import { Project } from "../lib/projects";
 
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   // Function to open the lightbox
-  const openLightbox = (project: any) => {
+  const openLightbox = (project) => {
     setSelectedProject(project);
     setIsLightboxOpen(true);
   };

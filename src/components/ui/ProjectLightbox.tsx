@@ -222,35 +222,35 @@ export default function ProjectLightbox({
   );
 }
 
-interface AssetSectionProps {
-  title: string;
-  assets: string[];
-  isVideo?: boolean;
-}
+// interface AssetSectionProps {
+//   title: string;
+//   assets: string[];
+//   isVideo?: boolean;
+// }
 
-function AssetSection({ title, assets, isVideo = false }: AssetSectionProps) {
-  return (
-    <div className="mb-12">
-      <h4 className="text-xl font-semibold mb-4">{title}</h4>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {assets.map((asset, index) => (
-          <div key={index} className="w-full">
-            {isVideo ? (
-              <video src={asset} controls className="w-full h-auto" />
-            ) : (
-              <div className="relative aspect-video">
-                <Image
-                  src={asset}
-                  alt={`${title} asset ${index + 1}`}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  className="rounded"
-                />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+// function AssetSection({ title, assets, isVideo = false }: AssetSectionProps) {
+//   return (
+//     <div className="mb-12">
+//       <h4 className="text-xl font-semibold mb-4">{title}</h4>
+//       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+//         {assets.map((asset, index) => (
+//           <div key={index} className="w-full">
+//             {isVideo ? (
+//               <video src={asset} controls className="w-full h-auto" />
+//             ) : (
+//               <div className="relative aspect-video">
+//                 <Image
+//                   src={asset}
+//                   alt={`${title} asset ${index + 1}`}
+//                   fill
+//                   style={{ objectFit: "cover" }}
+//                   className="rounded"
+//                 />
+//               </div>
+//             )}
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }

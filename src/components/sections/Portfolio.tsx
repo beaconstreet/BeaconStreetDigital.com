@@ -105,26 +105,26 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
     // Your existing filtering logic
   };
 
-  const handleOpenProject = (id: string) => {
-    const project = getProjectById(id);
-    if (project) {
-      setSelectedProject(project);
-      setIsLightboxOpen(true);
-    }
-  };
+  // const handleOpenProject = (id: string) => {
+  //   const project = getProjectById(id);
+  //   if (project) {
+  //     setSelectedProject(project);
+  //     setIsLightboxOpen(true);
+  //   }
+  // };
 
   const handleCloseLightbox = () => {
     setIsLightboxOpen(false);
   };
 
   // Check if a project's position has changed
-  const hasPositionChanged = (project: Project, currentIndex: number) => {
-    const oldData = projectPositions.get(project.id);
-    if (!oldData) return true; // New project
+  // const hasPositionChanged = (project: Project, currentIndex: number) => {
+  //   const oldData = projectPositions.get(project.id);
+  //   if (!oldData) return true; // New project
 
-    const newPosition = JSON.stringify(getGridPosition(currentIndex));
-    return oldData.position !== newPosition;
-  };
+  //   const newPosition = JSON.stringify(getGridPosition(currentIndex));
+  //   return oldData.position !== newPosition;
+  // };
 
   // Fix the item parameter type
   const handleItemClick = (item: Project) => {

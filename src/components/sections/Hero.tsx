@@ -356,7 +356,7 @@ export default function Hero() {
                     ? `clamp(2.5rem, ${windowWidth * 0.08}px, 4rem)`
                     : `clamp(2.5rem, ${windowWidth * 0.05}px, 8rem)`,
                   marginBottom: isMobile
-                    ? `clamp(4rem, ${windowWidth * 0.01}px, 4.5rem)`
+                    ? `clamp(3rem, ${windowWidth * 0.01}px, 3.5rem)`
                     : `clamp(5rem, ${windowWidth * 0.015}px, 5.5rem)`,
                   lineHeight: 1.2,
                   hyphens: "auto",
@@ -374,31 +374,13 @@ export default function Hero() {
                     ? `clamp(1rem, ${windowWidth * 0.035}px, 1.5rem)` // font size for mobile
                     : `clamp(1rem, ${windowWidth * 0.026}px, 1.7rem)`, // font size for desktop
                   marginBottom: isMobile
-                    ? `clamp(2rem, ${windowWidth * 0.01}px, 2.5rem)` // margin bottom for mobile
+                    ? `clamp(1.5rem, ${windowWidth * 0.01}px, 2rem)` // margin bottom for mobile
                     : `clamp(3rem, ${windowWidth * 0.015}px, 3.5rem)`, // margin bottom for desktop
                   lineHeight: 1.4,
                   hyphens: "none",
                 }}
               >
-                I design and develop digital experiences.
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={1.2}>
-              <div
-                className="secondary-text mb-8"
-                style={{
-                  fontSize: isMobile
-                    ? `clamp(1rem, ${windowWidth * 0.035}px, 1.5rem)`
-                    : `clamp(1rem, ${windowWidth * 0.026}px, 1.7rem)`,
-                  marginBottom: isMobile
-                    ? `clamp(2rem, ${windowWidth * 0.01}px, 2.5rem)`
-                    : `clamp(3rem, ${windowWidth * 0.015}px, 3.5rem)`,
-                  lineHeight: 1.4,
-                  hyphens: "none",
-                }}
-              >
-                I produce compelling video content.
+                I design, develop, and produce digital experiences.
               </div>
             </FadeIn>
 
@@ -409,13 +391,16 @@ export default function Hero() {
                   fontSize: isMobile
                     ? `clamp(1rem, ${windowWidth * 0.035}px, 1.5rem)`
                     : `clamp(1rem, ${windowWidth * 0.026}px, 1.7rem)`,
+                  marginBottom: isMobile
+                    ? `clamp(2rem, ${windowWidth * 0.01}px, 2rem)`
+                    : `clamp(3rem, ${windowWidth * 0.015}px, 3.5rem)`,
                   lineHeight: 1.4,
                   hyphens: "none",
                 }}
               >
                 Think of me as{" "}
                 <span className="accent-color font-semibold">
-                  a one-man digital agency.
+                  a one-man creative studio.
                 </span>
               </div>
             </FadeIn>
@@ -427,7 +412,7 @@ export default function Hero() {
       <motion.div
         className={`${
           isMobile
-            ? "absolute bottom-4 left-1/2 transform -translate-x-1/2 z-50 cursor-pointer"
+            ? "absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 cursor-pointer sm:bottom-4"
             : "absolute bottom-8 left-1/4 transform -translate-x-1/2 z-20 cursor-pointer"
         }`}
         initial={{ opacity: 0 }}

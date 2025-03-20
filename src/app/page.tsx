@@ -2,16 +2,17 @@
 
 import { useState, useEffect } from "react";
 import Hero from "../components/sections/Hero";
-import Portfolio from "../components/sections/Portfolio";
+import Portfolio from "@/components/sections/Portfolio";
 import Contact from "../components/sections/Contact";
 import ProjectLightbox from "@/components/ui/ProjectLightbox";
+import { Project } from "@/lib/projects";
 
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   // Function to open the lightbox
-  const openLightbox = (project) => {
+  const openLightbox = (project: Project) => {
     setSelectedProject(project);
     setIsLightboxOpen(true);
   };
@@ -57,7 +58,7 @@ export default function Home() {
 
       {/* Portfolio Section */}
       <section className="relative">
-        <Portfolio onCardClick={openLightbox} />
+        <Portfolio onCardClick={(project: Project) => openLightbox(project)} />
       </section>
 
       {/* Contact Section */}

@@ -54,16 +54,16 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
   };
 
   // Track which projects stay in the same position
-  useEffect(() => {
-    const newPositions = new Map();
+  // useEffect(() => {
+  //   const newPositions = new Map();
 
-    filteredProjects.forEach((project, index) => {
-      const position = JSON.stringify(getGridPosition(index));
-      newPositions.set(project.id, { index, position });
-    });
+  //   filteredProjects.forEach((project, index) => {
+  //     const position = JSON.stringify(getGridPosition(index));
+  //     newPositions.set(project.id, { index, position });
+  //   });
 
-    setProjectPositions(newPositions);
-  }, [filteredProjects]);
+  //   setProjectPositions(newPositions);
+  // }, [filteredProjects]);
 
   useEffect(() => {
     setIsAnimating(true);
@@ -354,7 +354,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
       </div>
 
       <ProjectLightbox
-        project={selectedProject}
+        project={null}
         isOpen={isLightboxOpen}
         onClose={handleCloseLightbox}
       />

@@ -35,7 +35,7 @@ const montserrat = Montserrat({
 });
 export const metadata: Metadata = {
   title:
-    "Beacon Street Digital - Los Angeles-based Web Design & Development, Vieo Creation",
+    "Beacon Street Digital - Los Angeles-based Web Design, Development, & Video Creation",
   description:
     "Beacon Street Digital - Web design, development, and video content creation",
 };

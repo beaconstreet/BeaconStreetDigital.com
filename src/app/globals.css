@@ -32,15 +32,6 @@ body {
   font-weight: 400;
 }
 
-@media (max-width: 500px) {
-  .email-shrink {
-    /* Using Tailwind @apply directive which needs a special comment for editors */
-    /* tailwindcss-apply-start */
-    @apply text-lg;
-    /* tailwindcss-apply-end */
-  }
-}
-
 .accent-color {
   color: #fb923c;
 }
@@ -84,4 +75,21 @@ body {
 /* Create a custom gradient class */
 .gradient-primary-to-transparent {
   background-image: linear-gradient(to right, #f8f4f1 75%, transparent 100%);
+}
+
+@media (min-width: 1000px) {
+  .hero-overlay {
+    width: 55%;
+    clip-path: polygon(0% 0%, 90% 0%, 100% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0% 0%, 90% 0%, 100% 100%, 0% 100%);
+  }
+}
+
+@media (max-width: 500px) {
+  .email-shrink {
+    /* Using Tailwind @apply directive which needs a special comment for editors */
+    /* tailwindcss-apply-start */
+    @apply text-lg;
+    /* tailwindcss-apply-end */
+  }
 }

@@ -18,7 +18,7 @@ export default function Hero() {
     // Get initial window width
     setWindowWidth(window.innerWidth);
     // Set initial mobile state
-    setIsMobile(window.innerWidth < 1200); // Consider screens < 1200px as mobile
+    setIsMobile(window.innerWidth < 1000); // Consider screens < 1200px as mobile
 
     // Function to handle image load
     const handleImageLoad = () => {
@@ -40,7 +40,7 @@ export default function Hero() {
     const handleResize = () => {
       const width = window.innerWidth;
       setWindowWidth(width);
-      setIsMobile(width < 1200); // Update mobile state on resize (now 1200px)
+      setIsMobile(width < 1000); // Update mobile state on resize (now 1200px)
       handleImageLoad();
     };
 
@@ -212,17 +212,18 @@ export default function Hero() {
         } z-0 overflow-hidden`}
       >
         <Image
-          src="/backgrounds/Man-urban-cityscape_Wide1_noClouds.png"
+          src="/backgrounds/Man-urban-cityscape_WIDE_Center_topaz.webp"
           alt="Man in urban cityscape with a Beacon Street billboard behind him"
           fill
           sizes="100vw"
           priority
           className="object-cover background-image"
           style={{
-            objectPosition: isMobile ? "100% 0%" : "90% 0%", // Right-aligned
             objectFit: "cover",
-            transform: isMobile ? "scale(1.2)" : "none", // Zoom in for mobile
-            transformOrigin: "right top", // Scale from the right side
+            transform: isMobile
+              ? "scale(1.4) translateX(0)"
+              : "scale(1) translateX(20%)", // Add horizontal shift for desktop
+            transformOrigin: "center center",
           }}
         />
 
@@ -309,9 +310,9 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* White overlay - left side (desktop only) or full width (mobile) */}
+      {/* White overlay - left side (desktop only) */}
       {!isMobile ? (
-        <div className="absolute inset-y-0 left-0 w-[50%] z-20 primary-bg" />
+        <div className="absolute inset-y-0 left-0 z-20 primary-bg hero-overlay" />
       ) : null}
 
       {/* Content container */}

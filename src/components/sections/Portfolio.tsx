@@ -177,7 +177,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
         <div className="flex flex-col md:flex-row">
           {/* Left sidebar with vertical category list - 30% width */}
           <div className="hidden md:block md:w-[30%]">
-            <div className="sticky top-8 pr-12 pl-12">
+            <div className="sticky top-24 pr-12 pl-12">
               <h3 className="text-4xl md:text-2xl lg:text-4xl font-montserrat font-bold mb-10 md:mb-6 lg:mb-10 uppercase tracking-wider">
                 <span className="text-gray-50">Recent</span>
                 <span className="accent-color"> Projects</span>

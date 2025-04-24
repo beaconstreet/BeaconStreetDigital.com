@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Hero from "../components/sections/Hero";
+import About from "../components/sections/About";
 import Portfolio from "@/components/sections/Portfolio";
 import Contact from "../components/sections/Contact";
 import ProjectLightbox from "@/components/ui/ProjectLightbox";
@@ -54,6 +55,11 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative">
         <Hero />
+      </section>
+
+      {/* About Section */}
+      <section className="relative">
+        <About />
       </section>
 
       {/* Portfolio Section */}

@@ -10,6 +10,8 @@ export default function Hero() {
   const cloud2Ref = useRef<HTMLDivElement>(null);
   const duplicateCloud1Ref = useRef<HTMLDivElement>(null);
   const duplicateCloud2Ref = useRef<HTMLDivElement>(null);
+  const airplaneRef = useRef<HTMLDivElement>(null);
+  const duplicateAirplaneRef = useRef<HTMLDivElement>(null);
   const [imageHeight, setImageHeight] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -18,7 +20,7 @@ export default function Hero() {
     // Get initial window width
     setWindowWidth(window.innerWidth);
     // Set initial mobile state
-    setIsMobile(window.innerWidth < 1000); // Consider screens < 1200px as mobile
+    setIsMobile(window.innerWidth < 1050); // Consider screens < 1200px as mobile
 
     // Function to handle image load
     const handleImageLoad = () => {
@@ -40,7 +42,7 @@ export default function Hero() {
     const handleResize = () => {
       const width = window.innerWidth;
       setWindowWidth(width);
-      setIsMobile(width < 1000); // Update mobile state on resize (now 1200px)
+      setIsMobile(width < 1050); // Update mobile state on resize (now 1200px)
       handleImageLoad();
     };
 
@@ -53,26 +55,33 @@ export default function Hero() {
     };
   }, []);
 
-  // Animation for clouds
+  // Animation for clouds and airplane
   useEffect(() => {
     if (
       !cloud1Ref.current ||
       !cloud2Ref.current ||
       !duplicateCloud1Ref.current ||
       !duplicateCloud2Ref.current ||
+      !airplaneRef.current ||
+      !duplicateAirplaneRef.current ||
       !windowWidth ||
       !imageHeight
     )
       return;
 
-    const cloudWidth = windowWidth * 0.3; // For cloud 1
+    const cloudWidth = windowWidth * 0.05; // For cloud 1
     const cloud2Width = windowWidth * 0.15; // For cloud 2 (smaller)
+    const airplaneWidth = windowWidth * 0.2; // For airplane
 
-    // Initialize positions - start all clouds off-screen
+    // Initialize positions - start all elements off-screen
     cloud1Ref.current.style.right = `300px`; // Cloud 1 starts partway on screen
     cloud2Ref.current.style.right = `0px`; // Cloud 2 starts on screen
     duplicateCloud1Ref.current.style.right = `-${cloudWidth}px`; // Duplicate 1 starts off-screen
     duplicateCloud2Ref.current.style.right = `-${cloud2Width}px`; // Duplicate 2 starts off-screen
+
+    // Position airplane further off-screen initially
+    airplaneRef.current.style.right = `-${airplaneWidth * 2}px`;
+    duplicateAirplaneRef.current.style.right = `-${airplaneWidth * 4}px`;
 
     const createCloudAnimation = (
       element: HTMLDivElement,
@@ -89,15 +98,14 @@ export default function Hero() {
 
     // Continuous animation approach
     const animateCloudsInfinitely = () => {
-      // First set of animations
+      // First set of animations - clouds
       const cloud1Animation = createCloudAnimation(
         cloud1Ref.current!,
         "300px",
         `${windowWidth + cloudWidth}px`,
-        100000
+        120000
       );
 
-      // Cloud 2 animation starts immediately
       const cloud2Animation = createCloudAnimation(
         cloud2Ref.current!,
         "0px",
@@ -105,13 +113,21 @@ export default function Hero() {
         120000
       );
 
-      // After 30 seconds, start duplicate cloud 1
+      // Airplane animation - 30% faster than clouds (approx. 70000ms vs 120000ms)
+      const airplaneAnimation = createCloudAnimation(
+        airplaneRef.current!,
+        `-${airplaneWidth * 2}px`,
+        `${windowWidth + airplaneWidth}px`,
+        70000
+      );
+
+      // After delay, start duplicate cloud 1
       setTimeout(() => {
         const duplicateCloud1Animation = createCloudAnimation(
           duplicateCloud1Ref.current!,
           `-${cloudWidth}px`,
           `${windowWidth + cloudWidth}px`,
-          100000
+          120000
         );
 
         // Set up continuous cycle for cloud 1
@@ -144,9 +160,9 @@ export default function Hero() {
             };
           };
         };
-      }, 10000); // Start duplicate after 30 seconds
+      }, 10000);
 
-      // After 30 seconds, start duplicate cloud 2
+      // After delay, start duplicate cloud 2
       setTimeout(() => {
         const duplicateCloud2Animation = createCloudAnimation(
           duplicateCloud2Ref.current!,
@@ -184,7 +200,47 @@ export default function Hero() {
             };
           };
         };
-      }, 30000); // Start duplicate after 30 seconds
+      }, 30000);
+
+      // After delay, start duplicate airplane
+      setTimeout(() => {
+        const duplicateAirplaneAnimation = createCloudAnimation(
+          duplicateAirplaneRef.current!,
+          `-${airplaneWidth * 4}px`,
+          `${windowWidth + airplaneWidth}px`,
+          70000
+        );
+
+        // Set up continuous cycle for airplane
+        airplaneAnimation.onfinish = () => {
+          // Reposition original airplane off-screen
+          airplaneRef.current!.style.right = `-${airplaneWidth * 2}px`;
+
+          // After duplicate finishes, start original again from off-screen
+          duplicateAirplaneAnimation.onfinish = () => {
+            // Start original airplane from off-screen
+            createCloudAnimation(
+              airplaneRef.current!,
+              `-${airplaneWidth * 2}px`,
+              `${windowWidth + airplaneWidth}px`,
+              70000
+            ).onfinish = () => {
+              // Reposition duplicate off-screen
+              duplicateAirplaneRef.current!.style.right = `-${
+                airplaneWidth * 4
+              }px`;
+
+              // Start duplicate airplane again
+              createCloudAnimation(
+                duplicateAirplaneRef.current!,
+                `-${airplaneWidth * 4}px`,
+                `${windowWidth + airplaneWidth}px`,
+                70000
+              );
+            };
+          };
+        };
+      }, 20000); // Start airplane duplicate after 20 seconds
     };
 
     // Start the animation cycle
@@ -197,6 +253,22 @@ export default function Hero() {
       top: window.innerHeight,
       behavior: "smooth",
     });
+  };
+
+  const scrollToProjects = () => {
+    // Scroll to Portfolio section
+    const portfolioSection = document.querySelector("section:nth-of-type(3)");
+    if (portfolioSection) {
+      portfolioSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToContact = () => {
+    // Scroll to Contact section
+    const contactSection = document.querySelector("section:nth-of-type(4)");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -212,7 +284,7 @@ export default function Hero() {
         } z-0 overflow-hidden`}
       >
         <Image
-          src="/backgrounds/Man-urban-cityscape_WIDE_Center_topaz.webp"
+          src="/backgrounds/MattOnBalcony_MJ1.webp"
           alt="Man in urban cityscape with a Beacon Street billboard behind him"
           fill
           sizes="100vw"
@@ -222,7 +294,7 @@ export default function Hero() {
             objectFit: "cover",
             transform: isMobile
               ? "scale(1.4) translateX(0)"
-              : "scale(1) translateX(20%)", // Add horizontal shift for desktop
+              : "scale(1) translateX(30%)", // Add horizontal shift for desktop
             transformOrigin: "center center",
           }}
         />
@@ -243,7 +315,7 @@ export default function Hero() {
             }}
           >
             <Image
-              src="/backgrounds/cloud1.png"
+              src="/backgrounds/Cloud3_whisk_alpha.png"
               alt="Cloud"
               fill
               sizes="30vw"
@@ -262,7 +334,7 @@ export default function Hero() {
             }}
           >
             <Image
-              src="/backgrounds/cloud1.png"
+              src="/backgrounds/Cloud3_whisk_alpha.png"
               alt="Cloud"
               fill
               sizes="30vw"
@@ -281,10 +353,10 @@ export default function Hero() {
             }}
           >
             <Image
-              src="/backgrounds/cloud2.png"
-              alt="Cloud"
+              src="/backgrounds/Cloud2_whisk_alpha.png"
+              alt="Airplane"
               fill
-              sizes="20vw" // Updated to match new width
+              // sizes="10vw" // Updated to match new width
               className="object-contain"
             />
           </div>
@@ -300,10 +372,48 @@ export default function Hero() {
             }}
           >
             <Image
-              src="/backgrounds/cloud2.png"
+              src="/backgrounds/Cloud2_whisk_alpha.png"
               alt="Cloud"
               fill
               sizes="20vw" // Updated to match new width
+              className="object-contain"
+            />
+          </div>
+
+          {/* Airplane */}
+          <div
+            ref={airplaneRef}
+            className="absolute"
+            style={{
+              height: "40%",
+              width: "20%",
+              top: "25%", // Position airplane a bit lower in the sky
+            }}
+          >
+            <Image
+              src="/backgrounds/airplane1_whisk_alpha_small.png"
+              alt="Airplane"
+              fill
+              sizes="20vw"
+              className="object-contain"
+            />
+          </div>
+
+          {/* Duplicate Airplane */}
+          <div
+            ref={duplicateAirplaneRef}
+            className="absolute"
+            style={{
+              height: "40%",
+              width: "20%",
+              top: "25%", // Match the position of the original airplane
+            }}
+          >
+            <Image
+              src="/backgrounds/airplane1_whisk_alpha_small.png"
+              alt="Airplane"
+              fill
+              sizes="20vw"
               className="object-contain"
             />
           </div>
@@ -409,40 +519,132 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Clickable scroll indicator (arrow) - show on both mobile and desktop */}
-      <motion.div
+      {/* Clickable scroll indicators (arrows) - show on both mobile and desktop */}
+      <div
         className={`${
           isMobile
-            ? "absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 cursor-pointer sm:bottom-4"
-            : "absolute bottom-8 left-1/4 transform -translate-x-1/2 z-20 cursor-pointer"
-        }`}
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-          y: [0, 10, 0],
-        }}
-        transition={{
-          opacity: { duration: 0.5 },
-          y: { repeat: Infinity, duration: 1.5, ease: "easeInOut" },
-        }}
-        onClick={scrollToPortfolio}
-        whileHover={{ scale: 1.2 }}
-        whileTap={{ scale: 0.9 }}
+            ? "absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 sm:bottom-4"
+            : "absolute bottom-8 left-1/4 transform -translate-x-1/2 z-20"
+        } flex justify-between w-full max-w-xl`}
       >
-        <svg
-          width={isMobile ? "38" : "60"}
-          height={isMobile ? "38" : "60"}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="text-black"
+        {/* "What I do" arrow */}
+        <motion.div
+          className="cursor-pointer flex-1 flex justify-center"
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            y: [0, 10, 0],
+          }}
+          transition={{
+            opacity: { duration: 0.5 },
+            y: { repeat: Infinity, duration: 1.5, ease: "easeInOut" },
+          }}
+          onClick={scrollToPortfolio}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
         >
-          <path d="M12 5v14M5 12l7 7 7-7" />
-        </svg>
-      </motion.div>
+          <div className="flex flex-col items-center">
+            <span className="font-montserrat text-sm font-thin mb-2 text-black">
+              What I do
+            </span>
+            <svg
+              width={isMobile ? "38" : "60"}
+              height={isMobile ? "38" : "60"}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-black"
+            >
+              <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+          </div>
+        </motion.div>
+
+        {/* "Recent Projects" arrow */}
+        <motion.div
+          className="cursor-pointer flex-1 flex justify-center"
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            y: [0, 10, 0],
+          }}
+          transition={{
+            opacity: { duration: 0.5 },
+            y: {
+              repeat: Infinity,
+              duration: 1.5,
+              ease: "easeInOut",
+              delay: 0.2,
+            },
+          }}
+          onClick={scrollToProjects}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <div className="flex flex-col items-center">
+            <span className="font-montserrat text-sm font-thin mb-2 text-black">
+              Recent Projects
+            </span>
+            <svg
+              width={isMobile ? "38" : "60"}
+              height={isMobile ? "38" : "60"}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-black"
+            >
+              <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+          </div>
+        </motion.div>
+
+        {/* "Let's Work Together" arrow */}
+        <motion.div
+          className="cursor-pointer flex-1 flex justify-center"
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            y: [0, 10, 0],
+          }}
+          transition={{
+            opacity: { duration: 0.5 },
+            y: {
+              repeat: Infinity,
+              duration: 1.5,
+              ease: "easeInOut",
+              delay: 0.4,
+            },
+          }}
+          onClick={scrollToContact}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <div className="flex flex-col items-center">
+            <span className="font-montserrat text-sm font-thin mb-2 text-black">
+              Let's Work Together
+            </span>
+            <svg
+              width={isMobile ? "38" : "60"}
+              height={isMobile ? "38" : "60"}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-black"
+            >
+              <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }

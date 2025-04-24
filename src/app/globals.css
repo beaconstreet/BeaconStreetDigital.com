@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbfbf9;
+  --background: #ecf6fa;
   --foreground: #171717;
 }
 
@@ -21,7 +21,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #ecf6fa;
   }
 }
 
@@ -53,7 +53,7 @@ body {
 }
 
 .primary-color {
-  color: #f8f4f1;
+  color: #ecf6fa;
 }
 
 .secondary-text {
@@ -65,16 +65,16 @@ body {
 }
 
 .primary-bg {
-  background-color: #f8f4f1;
+  background-color: #ecf6fa;
 }
 
 .primary-bg-transparent {
-  background-color: #f8f4f1c3;
+  background-color: #ecf6fac3;
 }
 
 /* Create a custom gradient class */
 .gradient-primary-to-transparent {
-  background-image: linear-gradient(to right, #f8f4f1 75%, transparent 100%);
+  background-image: linear-gradient(to right, #ecf6fa 75%, transparent 100%);
 }
 
 @media (min-width: 1000px) {

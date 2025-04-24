@@ -25,7 +25,7 @@ export default function Contact() {
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/backgrounds/Cozy Home Office Setup.jpeg"
+          src="/backgrounds/QuietCityMorning.webp"
           alt="Home office background"
           fill
           sizes="100vw"
@@ -35,7 +35,7 @@ export default function Contact() {
       </div>
 
       {/* Primary background color overlay with higher opacity */}
-      <div className="absolute inset-0 primary-bg opacity-90 z-10"></div>
+      <div className="absolute inset-0 primary-bg opacity-70 z-10"></div>
 
       {/* Content container with increased z-index */}
       <div className="container mx-auto px-4 md:px-8 relative z-40 w-full">

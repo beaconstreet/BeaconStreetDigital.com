@@ -77,10 +77,10 @@ export default function About() {
       name: "Adobe Creative Suite",
       icon: "/otherImages/AdobeCreative.svg",
     },
-    { name: "Typescript", icon: "/otherImages/Typescript.svg" },
-    { name: "Midjourney", icon: "/otherImages/Midjourney.svg" },
-    { name: "Tailwind CSS", icon: "/otherImages/Tailwind.svg" },
-    { name: "Shopify", icon: "/otherImages/Shopify.svg" },
+    { name: "Typescript", icon: "/otherImages/typescript.svg" },
+    { name: "Midjourney", icon: "/otherImages/midjourney.svg" },
+    { name: "Tailwind CSS", icon: "/otherImages/tailwind.svg" },
+    { name: "Shopify", icon: "/otherImages/shopify.svg" },
   ];
 
   return (

@@ -38,6 +38,30 @@
     }
   },
   {
+    "id": "Sh*t To Do With Kids",
+    "title": "Sh*t To Do With Kids",
+    "slug": "Sh*t To Do With Kids",
+    "categories": ["Website"],
+    "thumbnail": "/projects/STDWK/STDWK_desktop_NoMockup.webp",
+    "description": "Sh*t To Do With Kids is a project I embarked on with a friend and fellow dad. \n \n Lacking easy-to-access resources for great activities to do with our kids on the weekends, we created a hyper-local newsletter to allow parents to find at least 5 things to do in their LA neighborhood.  I tackled the design and coding of both the landing page and the email newsletter template.\n \n Coding email newsletters are infamously tricky because of the different ways that email clients render HTML.  Not to mention our chosen email service, ConvertKit, has their own idiosyncrasies.  I'm proud of the result, and it's been a lot of fun to watch the newsletter grow in subscribers.",
+    "url": "",
+    "services": [
+      "Website Design & Development",
+      "Email Newsletter Design & Development"
+    ],
+    "assets": {
+      "website": [
+        "/projects/STDWK/STDWK_desktop_Mockup.webp",
+        "/projects/STDWK/STDWK_mobile_Mockup.webp",
+        "/projects/STDWK/STDWK_desktopMail_Mockup.webp",
+        "/projects/STDWK/STDWK_2_iphones_mockup.webp"
+      ],
+      "video": [],
+      "digitalCampaigns": [],
+      "photography": []
+    }
+  },
+  {
     "id": "aqualand",
     "title": "Aqualand of the Free",
     "slug": "aqualand",

@@ -229,8 +229,8 @@ export default function About() {
             <FadeIn delay={0.5}>
               <p className="font-montserrat text-base mb-8 text-black">
                 I create clean, modern sites that don't just look good — they
-                work hard. Using user-first design principles, the latest AI
-                tools, and modern web tech, I build digital experiences that are
+                work hard. Using user-first design principles, modern web tech,
+                and the latest AI tools, I build digital experiences that are
                 fast, intuitive, and easy to maintain.
               </p>
             </FadeIn>
@@ -238,8 +238,8 @@ export default function About() {
             <FadeIn delay={0.7}>
               <p className="font-montserrat text-base mb-8 text-black">
                 With a background in storytelling, video, and post-production, I
-                bring a unique creative lens to problem-solving -- translating
-                brand goals into intuitive, engaging digital experiences.
+                bring a unique creative lens to problem-solving — translating
+                brand goals into engaging digital experiences.
               </p>
             </FadeIn>
 

@@ -70,7 +70,9 @@ export default function ProjectLightbox({
                   <h3 className="text-xl font-semibold mb-3 uppercase tracking-wide text-gray-700">
                     About the Project
                   </h3>
-                  <p className="text-lg">{project.description}</p>
+                  <p className="text-lg whitespace-pre-line">
+                    {project.description}
+                  </p>
                 </div>
 
                 {/* Services */}

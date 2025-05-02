@@ -8,7 +8,7 @@ export interface Project {
   thumbnail: string;
   description: string;
   url: string;
-  services: string[];
+  tools: string[];
   assets: {
     website: string[];
     video: string[];

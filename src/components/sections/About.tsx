@@ -87,10 +87,12 @@ export default function About() {
     <div className="relative min-h-screen w-full">
       {/* Container for the whole section */}
       <div className="flex flex-col lg:flex-row w-full relative">
-        {/* Left side - Image (full height on desktop, 50vh on mobile) */}
+        {/* Left side - Image (full height on desktop, 35vh on mobile) */}
         <div
           className={`${
-            isMobile ? "w-full h-[50vh]" : "w-1/2 h-screen sticky top-0"
+            isMobile
+              ? "w-full h-[25vh] sticky top-0 z-30"
+              : "w-1/2 h-screen sticky top-0"
           } relative`}
         >
           <Image
@@ -114,99 +116,115 @@ export default function About() {
             />
           )}
 
-          {/* Container for both arrows - moved to the left to account for angled divider */}
-          <div
-            className={`absolute bottom-8 z-40 flex justify-center space-x-10 w-full`}
-            style={{
-              transform: isMobile ? "translateX(0)" : "translateX(-15%)",
-            }}
-          >
-            {/* "Recent Projects" arrow */}
-            <motion.div
-              className="cursor-pointer"
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                y: [0, 10, 0],
-              }}
-              transition={{
-                opacity: { duration: 0.5 },
-                y: { repeat: Infinity, duration: 1.5, ease: "easeInOut" },
-              }}
-              onClick={scrollToPortfolio}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              {/* Label "Recent Projects" */}
-              <div className="flex flex-col items-center">
-                <span className="font-montserrat text-xs font-thin mb-2 text-[#ecf6fa]">
+          {/* Container for navigation buttons on mobile - moved to top */}
+          {isMobile ? (
+            <div className="absolute top-0 left-0 right-0 py-5 z-40 flex justify-center w-full bg-gradient-to-b from-black/50 to-transparent">
+              <div className="flex justify-center space-x-4 px-4">
+                <button
+                  onClick={scrollToPortfolio}
+                  className="primary-bg tertiary-text font-montserrat text-sm font-semibold rounded-full px-4 py-2 shadow-md"
+                >
                   Recent Projects
-                </span>
-                <svg
-                  width={isMobile ? "38" : "60"}
-                  height={isMobile ? "38" : "60"}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="primary-color"
-                >
-                  <path d="M12 5v14M5 12l7 7 7-7" />
-                </svg>
-              </div>
-            </motion.div>
+                </button>
 
-            {/* "Let's Work Together" arrow */}
-            <motion.div
-              className="cursor-pointer"
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                y: [0, 10, 0],
-              }}
-              transition={{
-                opacity: { duration: 0.5 },
-                y: {
-                  repeat: Infinity,
-                  duration: 1.5,
-                  ease: "easeInOut",
-                  delay: 0.2,
-                },
-              }}
-              onClick={scrollToContact}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              {/* Label "Let's Work Together" */}
-              <div className="flex flex-col items-center">
-                <span className="font-montserrat text-xs font-thin mb-2 text-[#ecf6fa]">
-                  Let's Work Together
-                </span>
-                <svg
-                  width={isMobile ? "38" : "60"}
-                  height={isMobile ? "38" : "60"}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="primary-color"
+                <button
+                  onClick={scrollToContact}
+                  className="primary-bg tertiary-text font-montserrat text-sm font-semibold rounded-full px-4 py-2 shadow-md"
                 >
-                  <path d="M12 5v14M5 12l7 7 7-7" />
-                </svg>
+                  Let's Talk
+                </button>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          ) : (
+            // Desktop arrows container - keep at bottom
+            <div
+              className="absolute bottom-8 z-40 flex justify-center space-x-10 w-full"
+              style={{ transform: "translateX(-15%)" }}
+            >
+              {/* Desktop arrows content remains the same */}
+              <motion.div
+                className="cursor-pointer"
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  y: [0, 10, 0],
+                }}
+                transition={{
+                  opacity: { duration: 0.5 },
+                  y: { repeat: Infinity, duration: 1.5, ease: "easeInOut" },
+                }}
+                onClick={scrollToPortfolio}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <div className="flex flex-col items-center">
+                  <span className="font-montserrat text-xs font-thin mb-2 text-[#ecf6fa]">
+                    Recent Projects
+                  </span>
+                  <svg
+                    width="60"
+                    height="60"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="primary-color"
+                  >
+                    <path d="M12 5v14M5 12l7 7 7-7" />
+                  </svg>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="cursor-pointer"
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  y: [0, 10, 0],
+                }}
+                transition={{
+                  opacity: { duration: 0.5 },
+                  y: {
+                    repeat: Infinity,
+                    duration: 1.5,
+                    ease: "easeInOut",
+                    delay: 0.2,
+                  },
+                }}
+                onClick={scrollToContact}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <div className="flex flex-col items-center">
+                  <span className="font-montserrat text-xs font-thin mb-2 text-[#ecf6fa]">
+                    Let's Work Together
+                  </span>
+                  <svg
+                    width="60"
+                    height="60"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="primary-color"
+                  >
+                    <path d="M12 5v14M5 12l7 7 7-7" />
+                  </svg>
+                </div>
+              </motion.div>
+            </div>
+          )}
         </div>
 
         {/* Right side - Content */}
         <div
           ref={ref}
           className={`${
-            isMobile ? "w-full py-16" : "w-1/2 min-h-screen"
+            isMobile ? "w-full py-0 z-20" : "w-1/2 min-h-screen"
           } flex items-center bg-[#fb923c] relative z-20`}
         >
           <div className="px-8 lg:px-16 xl:px-24 max-w-xl mx-auto lg:mx-0 mt-20 mb-20">

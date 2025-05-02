@@ -530,29 +530,37 @@ export default function Hero() {
         }`}
       >
         {isMobile ? (
-          <>
-            {/* Mobile buttons */}
-            <button
-              onClick={scrollToPortfolio}
-              className="secondary-bg primary-color font-montserrat text-sm font-semibold rounded-full px-4 py-2 shadow-md"
-            >
-              What I do
-            </button>
+          <div className="flex justify-between w-full">
+            {/* First button - What I do */}
+            <FadeIn delay={2.2}>
+              <button
+                onClick={scrollToPortfolio}
+                className="secondary-bg primary-color font-montserrat text-sm font-semibold rounded-full px-4 py-2 shadow-md"
+              >
+                What I do
+              </button>
+            </FadeIn>
 
-            <button
-              onClick={scrollToProjects}
-              className="secondary-bg primary-color font-montserrat text-sm font-semibold rounded-full px-4 py-2 shadow-md"
-            >
-              Recent Projects
-            </button>
+            {/* Second button - Recent Projects */}
+            <FadeIn delay={2.3}>
+              <button
+                onClick={scrollToProjects}
+                className="secondary-bg primary-color font-montserrat text-sm font-semibold rounded-full px-4 py-2 shadow-md"
+              >
+                Recent Projects
+              </button>
+            </FadeIn>
 
-            <button
-              onClick={scrollToContact}
-              className="secondary-bg primary-color font-montserrat text-sm font-semibold rounded-full px-4 py-2 shadow-md"
-            >
-              Let's Talk
-            </button>
-          </>
+            {/* Third button - Let's Talk */}
+            <FadeIn delay={2.4}>
+              <button
+                onClick={scrollToContact}
+                className="secondary-bg primary-color font-montserrat text-sm font-semibold rounded-full px-4 py-2 shadow-md"
+              >
+                Let's Talk
+              </button>
+            </FadeIn>
+          </div>
         ) : (
           <>
             {/* Desktop animated arrows */}

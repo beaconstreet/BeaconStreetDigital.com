@@ -3,18 +3,11 @@
     "id": "strange-strength",
     "title": "Strange Strength",
     "slug": "strange-strength",
-    "categories": ["Website", "Social"],
-    "thumbnail": "/projects/Strange/StrangeWebsite_HeroOnly.webp",
+    "categories": ["Front End Development", "Front End Design"],
+    "thumbnail": "/projects/Strange/StrangeDesktop_HeroOnly.webp",
     "description": "Strange Strength & Conditioning was looking to update their whole marketing approach — fresh website, updated SEO, social strategy, and digital advertising.",
     "url": "https://strangestrength.us",
-    "services": [
-      "Website Design & Development",
-      "SEO",
-      "Video Editing",
-      "Digital Campaigns",
-      "Social Strategy",
-      "Continued Support"
-    ],
+    "tools": ["HTML/CSS", "Figma"],
     "assets": {
       "website": [
         "/projects/Strange/Webp/Strange_Macbook.webp",
@@ -41,14 +34,15 @@
     "id": "Sh*t To Do With Kids",
     "title": "Sh*t To Do With Kids",
     "slug": "Sh*t To Do With Kids",
-    "categories": ["Website"],
+    "categories": [
+      "Front End Development",
+      "Software Development",
+      "Email Newsletter Design & Development"
+    ],
     "thumbnail": "/projects/STDWK/STDWK_desktop_NoMockup.webp",
     "description": "Sh*t To Do With Kids is a project I embarked on with a friend and fellow dad. \n \n Lacking easy-to-access resources for great activities to do with our kids on the weekends, we created a hyper-local newsletter to allow parents to find at least 5 things to do in their LA neighborhood.  I tackled the design and coding of both the landing page and the email newsletter template.\n \n Coding email newsletters are infamously tricky because of the different ways that email clients render HTML.  Not to mention our chosen email service, ConvertKit, has their own idiosyncrasies.  I'm proud of the result, and it's been a lot of fun to watch the newsletter grow in subscribers.",
     "url": "",
-    "services": [
-      "Website Design & Development",
-      "Email Newsletter Design & Development"
-    ],
+    "tools": ["Python", "HTML/CSS", "Figma", "ConvertKit", "ConvertKit API"],
     "assets": {
       "website": [
         "/projects/STDWK/STDWK_desktop_Mockup.webp",
@@ -65,16 +59,11 @@
     "id": "aqualand",
     "title": "Aqualand of the Free",
     "slug": "aqualand",
-    "categories": ["Website", "E-commerce"],
+    "categories": ["Front End Development", "E-commerce Development"],
     "thumbnail": "/projects/Aqualand/Aqualand_portfolio.webp",
     "description": "E-commerce website development for Aqualand of the Free, featuring a custom shopping experience.",
     "url": "https://aqualandofthefree.com",
-    "services": [
-      "Web Design & Development",
-      "E-commerce Setup",
-      "SEO",
-      "Continued Support"
-    ],
+    "tools": ["HTML/CSS", "JavaScript", "Squarespace"],
     "assets": {
       "website": [
         "/projects/Aqualand/1_Aqualand_macbook.webp",
@@ -92,17 +81,11 @@
     "id": "legion-of-fun",
     "title": "Legion of Fun",
     "slug": "legion-of-fun",
-    "categories": ["Website", "E-commerce"],
-    "thumbnail": "/projects/legionOfFun/LegionOfFun_Hero_nocomp1.webp",
+    "categories": ["Front End Development", "E-commerce Development"],
+    "thumbnail": "/projects/legionOfFun/LegionOfFun_Hero_noMockup.webp",
     "description": "Legion of Fun is a e-commerce outfit revolutionizing the foam surfboard market for kids and teens.  We integrated board designs and their fun primary colors into the website, as well as focusing on lifestyle visuals to complete the look and feel of the site.  We built into the Shopify ecosystem so that Legion of Fun can continue to grow in the available distribution and sales channels without rebuilding or starting over.",
     "url": "https://legionoffun.com",
-    "services": [
-      "Website Design & Development",
-      "E-commerce",
-      "SEO",
-      "Product Mockups",
-      "Continued support"
-    ],
+    "tools": ["HTML/CSS", "JavaScript", "Liquid", "Shopify", "Adobe Suite"],
     "assets": {
       "website": [
         "/projects/legionOfFun/LegionOfFun_Hero.webp",
@@ -120,15 +103,11 @@
     "id": "new-and-improved",
     "title": "New and Improved",
     "slug": "new-and-improved",
-    "categories": ["Website", "Video", "Social"],
+    "categories": ["Front End Design", "Front End Development"],
     "thumbnail": "/projects/New and Improved/Webp/NewAndImproved_Sarah.webp",
     "description": "Complete digital transformation for New and Improved, including website development, video content, and social media strategy.",
     "url": "https://newandimprovedfilm.com",
-    "services": [
-      "Web Development",
-      "Video Production",
-      "Social Media Strategy"
-    ],
+    "tools": ["Wordpress", "Figma", "Adobe Suite"],
     "assets": {
       "website": [
         "/projects/New and Improved/Webp/1_NewAndImproved_website_HeroDesktop.webp",
@@ -136,7 +115,7 @@
         "/projects/New and Improved/Webp/3_NewAndImproved_website_HeroMobile.webp",
         "/projects/New and Improved/Webp/4_NewAndImproved_website_innerMobile.webp"
       ],
-      "video": ["https://www.youtube.com/embed/2ptFSVmGa_o"],
+      "video": [],
       "digitalCampaigns": [],
       "photography": []
     }

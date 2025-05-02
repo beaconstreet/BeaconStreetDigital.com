@@ -75,16 +75,16 @@ export default function ProjectLightbox({
                   </p>
                 </div>
 
-                {/* Services */}
-                {project.services && project.services.length > 0 && (
+                {/* Tools Used (previously Services) */}
+                {project.tools && project.tools.length > 0 && (
                   <div>
                     <h3 className="text-xl font-semibold mb-3 uppercase tracking-wide text-gray-700">
-                      Services
+                      Tools Used
                     </h3>
                     <ul className="list-disc pl-6 space-y-2">
-                      {project.services.map((service, index) => (
+                      {project.tools.map((tool, index) => (
                         <li key={index} className="text-lg">
-                          {service}
+                          {tool}
                         </li>
                       ))}
                     </ul>

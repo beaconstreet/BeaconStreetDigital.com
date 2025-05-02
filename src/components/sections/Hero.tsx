@@ -274,13 +274,15 @@ export default function Hero() {
   return (
     <div
       className={`relative ${
-        isMobile ? "flex flex-col" : "min-h-screen flex items-center"
+        isMobile
+          ? "flex flex-col min-h-screen"
+          : "min-h-screen flex items-center"
       }`}
     >
       {/* Background image */}
       <div
         className={`${
-          isMobile ? "relative h-[50vh]" : "absolute inset-0"
+          isMobile ? "relative h-[35vh]" : "absolute inset-0"
         } z-0 overflow-hidden`}
       >
         <Image
@@ -435,12 +437,12 @@ export default function Hero() {
           }
         `}
         style={{
-          height: isMobile ? "50vh" : "auto",
+          height: isMobile ? "65vh" : "auto",
         }}
       >
         <div
           className={`relative ${
-            isMobile ? "h-full flex items-center" : "w-full"
+            isMobile ? "h-full flex items-start pt-15" : "w-full"
           }`}
         >
           {/* Content positioning */}
@@ -519,131 +521,157 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Clickable scroll indicators (arrows) - show on both mobile and desktop */}
+      {/* Navigation buttons - show different styles for mobile and desktop */}
       <div
         className={`${
           isMobile
-            ? "absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 sm:bottom-4"
-            : "absolute bottom-8 left-1/4 transform -translate-x-1/2 z-20"
-        } flex justify-between w-full max-w-xl`}
+            ? "absolute bottom-[10%] left-1/2 transform -translate-x-1/2 z-50 flex justify-between w-full max-w-sm px-4"
+            : "absolute bottom-8 left-1/4 transform -translate-x-1/2 z-20 flex justify-between w-full max-w-xl"
+        }`}
       >
-        {/* "What I do" arrow */}
-        <motion.div
-          className="cursor-pointer flex-1 flex justify-center"
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            y: [0, 10, 0],
-          }}
-          transition={{
-            opacity: { duration: 0.5 },
-            y: { repeat: Infinity, duration: 1.5, ease: "easeInOut" },
-          }}
-          onClick={scrollToPortfolio}
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <div className="flex flex-col items-center">
-            <span className="font-montserrat text-sm font-thin mb-2 text-black">
+        {isMobile ? (
+          <>
+            {/* Mobile buttons */}
+            <button
+              onClick={scrollToPortfolio}
+              className="secondary-bg primary-color font-montserrat text-sm font-semibold rounded-full px-4 py-2 shadow-md"
+            >
               What I do
-            </span>
-            <svg
-              width={isMobile ? "38" : "60"}
-              height={isMobile ? "38" : "60"}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-black"
-            >
-              <path d="M12 5v14M5 12l7 7 7-7" />
-            </svg>
-          </div>
-        </motion.div>
+            </button>
 
-        {/* "Recent Projects" arrow */}
-        <motion.div
-          className="cursor-pointer flex-1 flex justify-center"
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            y: [0, 10, 0],
-          }}
-          transition={{
-            opacity: { duration: 0.5 },
-            y: {
-              repeat: Infinity,
-              duration: 1.5,
-              ease: "easeInOut",
-              delay: 0.2,
-            },
-          }}
-          onClick={scrollToProjects}
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <div className="flex flex-col items-center">
-            <span className="font-montserrat text-sm font-thin mb-2 text-black">
+            <button
+              onClick={scrollToProjects}
+              className="secondary-bg primary-color font-montserrat text-sm font-semibold rounded-full px-4 py-2 shadow-md"
+            >
               Recent Projects
-            </span>
-            <svg
-              width={isMobile ? "38" : "60"}
-              height={isMobile ? "38" : "60"}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-black"
-            >
-              <path d="M12 5v14M5 12l7 7 7-7" />
-            </svg>
-          </div>
-        </motion.div>
+            </button>
 
-        {/* "Let's Work Together" arrow */}
-        <motion.div
-          className="cursor-pointer flex-1 flex justify-center"
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            y: [0, 10, 0],
-          }}
-          transition={{
-            opacity: { duration: 0.5 },
-            y: {
-              repeat: Infinity,
-              duration: 1.5,
-              ease: "easeInOut",
-              delay: 0.4,
-            },
-          }}
-          onClick={scrollToContact}
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <div className="flex flex-col items-center">
-            <span className="font-montserrat text-sm font-thin mb-2 text-black">
-              Let's Work Together
-            </span>
-            <svg
-              width={isMobile ? "38" : "60"}
-              height={isMobile ? "38" : "60"}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-black"
+            <button
+              onClick={scrollToContact}
+              className="secondary-bg primary-color font-montserrat text-sm font-semibold rounded-full px-4 py-2 shadow-md"
             >
-              <path d="M12 5v14M5 12l7 7 7-7" />
-            </svg>
-          </div>
-        </motion.div>
+              Let's Talk
+            </button>
+          </>
+        ) : (
+          <>
+            {/* Desktop animated arrows */}
+            <motion.div
+              className="cursor-pointer flex-1 flex justify-center"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                y: [0, 10, 0],
+              }}
+              transition={{
+                opacity: { duration: 0.5 },
+                y: { repeat: Infinity, duration: 1.5, ease: "easeInOut" },
+              }}
+              onClick={scrollToPortfolio}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <div className="flex flex-col items-center">
+                <span className="font-montserrat text-sm font-thin mb-2 text-black">
+                  What I do
+                </span>
+                <svg
+                  width="60"
+                  height="60"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-black"
+                >
+                  <path d="M12 5v14M5 12l7 7 7-7" />
+                </svg>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="cursor-pointer flex-1 flex justify-center"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                y: [0, 10, 0],
+              }}
+              transition={{
+                opacity: { duration: 0.5 },
+                y: {
+                  repeat: Infinity,
+                  duration: 1.5,
+                  ease: "easeInOut",
+                  delay: 0.2,
+                },
+              }}
+              onClick={scrollToProjects}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <div className="flex flex-col items-center">
+                <span className="font-montserrat text-sm font-thin mb-2 text-black">
+                  Recent Projects
+                </span>
+                <svg
+                  width="60"
+                  height="60"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-black"
+                >
+                  <path d="M12 5v14M5 12l7 7 7-7" />
+                </svg>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="cursor-pointer flex-1 flex justify-center"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                y: [0, 10, 0],
+              }}
+              transition={{
+                opacity: { duration: 0.5 },
+                y: {
+                  repeat: Infinity,
+                  duration: 1.5,
+                  ease: "easeInOut",
+                  delay: 0.4,
+                },
+              }}
+              onClick={scrollToContact}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <div className="flex flex-col items-center">
+                <span className="font-montserrat text-sm font-thin mb-2 text-black">
+                  Let's Work Together
+                </span>
+                <svg
+                  width="60"
+                  height="60"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-black"
+                >
+                  <path d="M12 5v14M5 12l7 7 7-7" />
+                </svg>
+              </div>
+            </motion.div>
+          </>
+        )}
       </div>
     </div>
   );

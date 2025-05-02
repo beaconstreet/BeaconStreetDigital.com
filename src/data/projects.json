@@ -115,71 +115,7 @@
       "photography": []
     }
   },
-  {
-    "id": "emily-winnie",
-    "title": "Emily Winnie Photography",
-    "slug": "emily-winnie",
-    "categories": ["Video"],
-    "thumbnail": "/projects/Emily/EmilyPhoto.webp",
-    "description": "Video production for Emily Winnie Photography, highlighting her portfolio and creative process.",
-    "url": "https://emilywinnie.com/behind-the-scenes/",
-    "services": ["Video Production", "Editing", "Content Creation"],
-    "assets": {
-      "website": [],
-      "video": ["https://www.youtube.com/embed/O4DGRhZs1rc"],
-      "digitalCampaigns": [],
-      "photography": []
-    }
-  },
-  {
-    "id": "kirt-kingzett",
-    "title": "Kirt Kingzett Real Estate",
-    "slug": "kirt-kingzett",
-    "categories": ["Video", "Social", "Photography"],
-    "thumbnail": "/projects/Kirt/Kirt_Portfolio.webp",
-    "description": "Comprehensive digital presence for Kirt Kingzett Real Estate, including photography and social media management.",
-    "url": "",
-    "services": ["Photography", "Social Media Management", "Video Production"],
-    "assets": {
-      "website": [],
-      "video": [
-        "https://www.youtube.com/embed/H23eHmqVGrk",
-        "https://www.youtube.com/embed/fNImZIjH2vM",
-        "https://www.youtube.com/embed/hOHxjRtH-g4"
-      ],
-      "digitalCampaigns": [],
-      "photography": [
-        "/projects/Kirt/Webp/1_250_N_FirstSt_3.webp",
-        "/projects/Kirt/Webp/2_A7_01810.webp",
-        "/projects/Kirt/Webp/3_Friar_Loft_1.webp",
-        "/projects/Kirt/Webp/4_Front1.webp",
-        "/projects/Kirt/Webp/5_LivingRoom2.webp"
-      ]
-    }
-  },
-  {
-    "id": "charles-chung",
-    "title": "Charles Chung Personal Training",
-    "slug": "charles-chung",
-    "categories": ["Video", "Photography"],
-    "thumbnail": "/projects/Charlie/CharlieFit.webp",
-    "description": "Video and photography content for Charles Chung Personal Training, showcasing fitness routines and client success stories.",
-    "url": "",
-    "services": ["Video Production", "Photography", "Content Strategy"],
-    "assets": {
-      "website": [],
-      "video": [
-        "https://www.youtube.com/embed/esMGHRGDG_s",
-        "https://www.youtube.com/embed/9IXejIK0SQg"
-      ],
-      "digitalCampaigns": [],
-      "photography": [
-        "/projects/Charlie/CharlieSeminar1.webp",
-        "/projects/Charlie/CharlieSeminar2.webp",
-        "/projects/Charlie/CharlieSeminar3.webp"
-      ]
-    }
-  },
+
   {
     "id": "new-and-improved",
     "title": "New and Improved",
@@ -201,29 +137,6 @@
         "/projects/New and Improved/Webp/4_NewAndImproved_website_innerMobile.webp"
       ],
       "video": ["https://www.youtube.com/embed/2ptFSVmGa_o"],
-      "digitalCampaigns": [],
-      "photography": []
-    }
-  },
-  {
-    "id": "arcstone-financial",
-    "title": "Arcstone Financial",
-    "slug": "arcstone-financial",
-    "categories": ["Video", "Social"],
-    "thumbnail": "/projects/Mardi/MeetMardi.webp",
-    "description": "Video content and social media campaign for Meet Mardi, designed to increase brand awareness and engagement.",
-    "url": "",
-    "services": [
-      "Video Production",
-      "Social Media Management",
-      "Content Creation"
-    ],
-    "assets": {
-      "website": [],
-      "video": [
-        "https://www.youtube.com/embed/5bXwsHOLW-U",
-        "https://www.youtube.com/embed/nhkHkORXhSk"
-      ],
       "digitalCampaigns": [],
       "photography": []
     }

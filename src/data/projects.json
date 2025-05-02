@@ -97,27 +97,5 @@
       "digitalCampaigns": [],
       "photography": []
     }
-  },
-
-  {
-    "id": "new-and-improved",
-    "title": "New and Improved",
-    "slug": "new-and-improved",
-    "categories": ["Front End Design", "Front End Development"],
-    "thumbnail": "/projects/New and Improved/Webp/NewAndImproved_Sarah.webp",
-    "description": "Complete digital transformation for New and Improved, including website development, video content, and social media strategy.",
-    "url": "https://newandimprovedfilm.com",
-    "tools": ["Wordpress", "Figma", "Adobe Suite"],
-    "assets": {
-      "website": [
-        "/projects/New and Improved/Webp/1_NewAndImproved_website_HeroDesktop.webp",
-        "/projects/New and Improved/Webp/2_NewAndImproved_website_AboutDesktop.webp",
-        "/projects/New and Improved/Webp/3_NewAndImproved_website_HeroMobile.webp",
-        "/projects/New and Improved/Webp/4_NewAndImproved_website_innerMobile.webp"
-      ],
-      "video": [],
-      "digitalCampaigns": [],
-      "photography": []
-    }
   }
 ]

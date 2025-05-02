@@ -525,7 +525,7 @@ export default function Hero() {
       <div
         className={`${
           isMobile
-            ? "absolute bottom-[10%] left-1/2 transform -translate-x-1/2 z-50 flex justify-between w-full max-w-sm px-4"
+            ? "absolute bottom-[15%] left-1/2 transform -translate-x-1/2 z-50 flex justify-between w-full max-w-sm px-4"
             : "absolute bottom-8 left-1/4 transform -translate-x-1/2 z-20 flex justify-between w-full max-w-xl"
         }`}
       >

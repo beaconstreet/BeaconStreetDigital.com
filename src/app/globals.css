@@ -15,6 +15,7 @@
   --font-caveat: var(--font-caveat);
   --font-knewave: var(--font-knewave);
   --font-montserrat: var(--font-montserrat);
+  --font-pragmatica-extended: var(--font-pragmatica-extended);
 }
 /* postcss-theme-fold-end */
 
@@ -76,6 +77,21 @@ body {
   background-color: #ecf6fac3;
 }
 
+.strange-dark-text {
+  color: #1c1c1c;
+}
+
+.strange-dark-bg {
+  background-color: #1c1c1c;
+}
+
+.strange-light-text {
+  color: #f1f1f1;
+}
+
+.strange-light-bg {
+  background-color: #f1f1f1;
+}
 /* Create a custom gradient class */
 .gradient-primary-to-transparent {
   background-image: linear-gradient(to right, #ecf6fa 75%, transparent 100%);

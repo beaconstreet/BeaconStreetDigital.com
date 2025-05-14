@@ -8,6 +8,7 @@ export interface Project {
   thumbnail: string;
   description: string;
   url: string;
+  caseStudyUrl?: string;
   tools: string[];
   assets: {
     website: string[];

@@ -47,11 +47,11 @@ export default function StrangeCaseStudy() {
 
       {/* Laptop Mockup Section */}
       <section className="pt-0 w-full">
-        <div className="md:col-span-7 h-[70vh] overflow-hidden">
+        <div className="md:col-span-7 h-[80vh] overflow-hidden">
           <Image
-            src="/projects/Strange/StrangeCaseStudyImages/Strange_Desktop_MacbookAir 1.png"
-            width={1000}
-            height={600}
+            src="/projects/Strange/StrangeCaseStudyImages/Strange_Desktop_MacbookAir.webp"
+            width={2000}
+            height={1048}
             alt="Strange Strength website on laptop"
             className="w-full h-full object-cover"
           />
@@ -1054,9 +1054,9 @@ export default function StrangeCaseStudy() {
 
         <div>
           <Image
-            src="/projects/Strange/StrangeCaseStudyImages/Mobile_leaning_doublePage 1.png"
-            width={500}
-            height={800}
+            src="/projects/Strange/StrangeCaseStudyImages/Mobile_leaning_doublePage.webp"
+            width={2000}
+            height={1217}
             alt="Mobile Design 2"
             className="w-full h-auto"
           />
@@ -1115,9 +1115,9 @@ export default function StrangeCaseStudy() {
         </div>
 
         <Image
-          src="/projects/Strange/StrangeCaseStudyImages/iPhone_iPad_2025_0425 1.png"
-          width={500}
-          height={800}
+          src="/projects/Strange/StrangeCaseStudyImages/iPhone_iPad_2025_0425.webp"
+          width={1600}
+          height={1000}
           alt="Mobile Design"
           className="w-full h-auto"
         />

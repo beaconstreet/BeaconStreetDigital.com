@@ -62,8 +62,8 @@ export default function ProjectLightbox({
         <div className="lightbox-content">
           {/* Two column layout: 30% left, 70% right */}
           <div className="flex flex-col md:flex-row gap-8 mb-8">
-            {/* Left column - 30% - Sticky */}
-            <div className="md:w-[30%] md:sticky md:top-20 md:self-start">
+            {/* Left column - 30% - No longer sticky */}
+            <div className="md:w-[30%]">
               <div className="space-y-8">
                 {/* Project Description */}
                 <div>

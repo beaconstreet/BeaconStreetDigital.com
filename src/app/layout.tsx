@@ -50,9 +50,9 @@ const pragmaticaExtended = localFont({
 
 export const metadata: Metadata = {
   title:
-    "Beacon Street Digital - Los Angeles-based Web Design, Development, & Video Creation",
+    "Beacon Street Digital - Los Angeles-based Digital Designer & Developer",
   description:
-    "Beacon Street Digital - Web design, development, and video content creation",
+    "Beacon Street Digital - Los Angeles-based Digital Designer & Developer",
 };
 
 export default function RootLayout({

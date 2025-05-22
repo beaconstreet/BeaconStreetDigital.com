@@ -5,7 +5,15 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function StrangeCaseStudy() {
+interface StrangeCaseStudyProps {
+  isInLightbox?: boolean;
+  onLightboxClose?: () => void;
+}
+
+export default function StrangeCaseStudy({
+  isInLightbox = false,
+  onLightboxClose,
+}: StrangeCaseStudyProps) {
   return (
     <main className="min-h-screen strange-light-bg strange-dark-text">
       {/* Header Section with Mobile Mockups */}
@@ -1131,12 +1139,23 @@ export default function StrangeCaseStudy() {
         >
           EXPLORE MORE PROJECTS
         </h2>
-        <Link
-          href="/"
-          className="inline-flex items-center px-8 py-3 bg-yellow-500 text-black rounded font-bold text-lg hover:bg-yellow-600 transition-colors"
-        >
-          Back to Portfolio
-        </Link>
+
+        {/* Conditional rendering for the button/link */}
+        {isInLightbox ? (
+          <button
+            onClick={onLightboxClose}
+            className="inline-flex items-center px-8 py-3 bg-yellow-500 text-black rounded font-bold text-lg hover:bg-yellow-600 transition-colors"
+          >
+            Back to Portfolio
+          </button>
+        ) : (
+          <Link
+            href="/#portfolio"
+            className="inline-flex items-center px-8 py-3 bg-yellow-500 text-black rounded font-bold text-lg hover:bg-yellow-600 transition-colors"
+          >
+            Back to Portfolio
+          </Link>
+        )}
       </section>
     </main>
   );

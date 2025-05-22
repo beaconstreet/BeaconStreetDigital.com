@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import ProjectLightbox from "@/components/ui/ProjectLightbox";
+import CaseStudyLightbox from "@/components/ui/CaseStudyLightbox";
 import {
   getAllProjects,
   // getProjectById,
@@ -23,6 +24,12 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
   );
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [, setIsAnimating] = useState(false);
+
+  // Add state for case study lightbox
+  const [isCaseStudyOpen, setIsCaseStudyOpen] = useState(false);
+  const [activeCaseStudyId, setActiveCaseStudyId] = useState<string | null>(
+    null
+  );
 
   const [,] = useInView({
     triggerOnce: false,
@@ -65,16 +72,30 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
     setIsLightboxOpen(false);
   };
 
+  // Add this function to close the case study lightbox
+  const handleCloseCaseStudy = () => {
+    setIsCaseStudyOpen(false);
+    setActiveCaseStudyId(null);
+  };
+
   // Add this new function to handle button clicks
   const handleButtonClick = (e: React.MouseEvent, project: Project) => {
     e.stopPropagation(); // Prevent the click from bubbling up to the parent div
     onCardClick(project);
   };
 
-  // Add this new function to handle case study button clicks
+  // Update this function to handle case study button clicks
   const handleCaseStudyClick = (e: React.MouseEvent, caseStudyUrl: string) => {
     e.stopPropagation(); // Prevent the click from bubbling up
-    window.open(caseStudyUrl, "_blank");
+
+    // Check if this is the Strange Strength case study
+    if (caseStudyUrl.includes("strange-strength")) {
+      setActiveCaseStudyId("strange-strength");
+      setIsCaseStudyOpen(true);
+    } else {
+      // For other case studies, open in a new tab
+      window.open(caseStudyUrl, "_blank");
+    }
   };
 
   // Fix the image error handling types
@@ -86,6 +107,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
 
   return (
     <section
+      id="portfolio"
       ref={sectionRef}
       className="min-h-screen secondary-bg text-off-white py-14 md:py-24"
     >
@@ -236,6 +258,17 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
         isOpen={isLightboxOpen}
         onClose={handleCloseLightbox}
       />
+
+      {/* Add the CaseStudyLightbox component */}
+      <AnimatePresence>
+        {isCaseStudyOpen && (
+          <CaseStudyLightbox
+            isOpen={isCaseStudyOpen}
+            onClose={handleCloseCaseStudy}
+            caseStudyId={activeCaseStudyId}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 };

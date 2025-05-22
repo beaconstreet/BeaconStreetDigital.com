@@ -65,9 +65,16 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
     setIsLightboxOpen(false);
   };
 
-  // Fix the item parameter type
-  const handleItemClick = (item: Project) => {
-    onCardClick(item);
+  // Add this new function to handle button clicks
+  const handleButtonClick = (e: React.MouseEvent, project: Project) => {
+    e.stopPropagation(); // Prevent the click from bubbling up to the parent div
+    onCardClick(project);
+  };
+
+  // Add this new function to handle case study button clicks
+  const handleCaseStudyClick = (e: React.MouseEvent, caseStudyUrl: string) => {
+    e.stopPropagation(); // Prevent the click from bubbling up
+    window.open(caseStudyUrl, "_blank");
   };
 
   // Fix the image error handling types
@@ -108,8 +115,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
                   transition={{ duration: 0.3 }}
                 >
                   <motion.div
-                    className="bg-gray-800 overflow-hidden cursor-pointer relative group h-full"
-                    onClick={() => handleItemClick(project)}
+                    className="bg-gray-800 overflow-hidden relative group h-full"
                     style={{ aspectRatio: "550/341" }}
                   >
                     {project.thumbnail ? (
@@ -130,18 +136,36 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
                         </span>
                       </div>
                     )}
-                    <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4">
-                      <h3 className="text-xl font-semibold text-gray-200 mb-2">
+                    <div className="absolute inset-0 accent-bg-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4">
+                      <h3 className="text-2xl uppercase font-semibold tertiary-text mb-2">
                         {project.title}
                       </h3>
                       {project.categories && project.categories.length > 0 && (
-                        <p className="text-gray-300">
+                        <p className="tertiary-text text-sm text-center w-[80%]">
                           {project.categories.join(", ")}
                         </p>
                       )}
-                      <span className="mt-4 px-4 py-2 border border-gray-400 text-gray-200 rounded text-sm">
-                        View Project
-                      </span>
+                      <div className="flex flex-col gap-3 mt-4">
+                        <button
+                          onClick={(e) => handleButtonClick(e, project)}
+                          className="px-4 py-2 border tertiary-border tertiary-text rounded text-sm hover-secondary-bg hover-primary-color transition-colors duration-200"
+                        >
+                          View Project
+                        </button>
+                        {project.caseStudyUrl && (
+                          <button
+                            onClick={(e) =>
+                              handleCaseStudyClick(
+                                e,
+                                project.caseStudyUrl || ""
+                              )
+                            }
+                            className="px-4 py-2 border tertiary-border tertiary-text rounded text-sm hover-secondary-bg hover-primary-color transition-colors duration-200"
+                          >
+                            View Case Study
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </motion.div>
                 </motion.div>
@@ -154,8 +178,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
             {filteredProjects.map((project) => (
               <motion.div
                 key={project.id}
-                className="bg-gray-800 overflow-hidden cursor-pointer relative group h-full"
-                onClick={() => handleItemClick(project)}
+                className="bg-gray-800 overflow-hidden relative group h-full"
                 style={{ aspectRatio: "550/341" }}
               >
                 {project.thumbnail ? (
@@ -174,18 +197,33 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
                     <span className="text-gray-400">No image available</span>
                   </div>
                 )}
-                <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4">
-                  <h3 className="text-xl font-semibold text-gray-200 mb-2">
+                <div className="absolute inset-0 accent-bg-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4">
+                  <h3 className="text-2xl tertiary-text uppercase font-semibold mb-2">
                     {project.title}
                   </h3>
                   {project.categories && project.categories.length > 0 && (
-                    <p className="text-gray-300">
+                    <p className="tertiary-text text-sm text-center w-[80%]">
                       {project.categories.join(", ")}
                     </p>
                   )}
-                  <span className="mt-4 px-4 py-2 border border-gray-400 text-gray-200 rounded-full text-sm">
-                    View Project
-                  </span>
+                  <div className="flex flex-col gap-3 mt-4">
+                    <button
+                      onClick={(e) => handleButtonClick(e, project)}
+                      className="px-4 py-2 border tertiary-border tertiary-text rounded text-sm hover-secondary-bg hover-primary-color transition-colors duration-200"
+                    >
+                      View Project
+                    </button>
+                    {project.caseStudyUrl && (
+                      <button
+                        onClick={(e) =>
+                          handleCaseStudyClick(e, project.caseStudyUrl || "")
+                        }
+                        className="px-4 py-2 border tertiary-border tertiary-text rounded text-sm hover-secondary-bg hover-primary-color transition-colors duration-200"
+                      >
+                        View Case Study
+                      </button>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             ))}

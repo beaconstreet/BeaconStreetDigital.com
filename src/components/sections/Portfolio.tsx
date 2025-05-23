@@ -31,6 +31,9 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
     null
   );
 
+  // Add state for mobile overlay
+  const [activeMobileCard, setActiveMobileCard] = useState<string | null>(null);
+
   const [,] = useInView({
     triggerOnce: false,
     threshold: 0.1,
@@ -103,6 +106,17 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
     const img = e.currentTarget;
     img.src = "/path/to/fallback-image.jpg"; // Your fallback image path
     img.onerror = null; // Prevent infinite loop if fallback also fails
+  };
+
+  // Add handler for mobile card clicks
+  const handleMobileCardClick = (projectId: string) => {
+    if (activeMobileCard === projectId) {
+      // If this card is already active, hide the overlay
+      setActiveMobileCard(null);
+    } else {
+      // Show overlay for this card
+      setActiveMobileCard(projectId);
+    }
   };
 
   return (
@@ -195,13 +209,14 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
             </AnimatePresence>
           </div>
 
-          {/* Mobile view: 1 column grid */}
+          {/* Mobile view: 1 column grid with click-to-show overlay */}
           <div className="grid grid-cols-1 gap-[5px] md:hidden">
             {filteredProjects.map((project) => (
               <motion.div
                 key={project.id}
-                className="bg-gray-800 overflow-hidden relative group h-full"
+                className="bg-gray-800 overflow-hidden relative h-full cursor-pointer"
                 style={{ aspectRatio: "550/341" }}
+                onClick={() => handleMobileCardClick(project.id)}
               >
                 {project.thumbnail ? (
                   <img
@@ -219,7 +234,15 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
                     <span className="text-gray-400">No image available</span>
                   </div>
                 )}
-                <div className="absolute inset-0 accent-bg-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4">
+
+                {/* Overlay - show when card is active */}
+                <div
+                  className={`absolute inset-0 accent-bg-overlay transition-opacity duration-300 flex flex-col justify-center items-center p-4 ${
+                    activeMobileCard === project.id
+                      ? "opacity-100"
+                      : "opacity-0 pointer-events-none"
+                  }`}
+                >
                   <h3 className="text-2xl tertiary-text uppercase font-semibold mb-2">
                     {project.title}
                   </h3>
@@ -231,7 +254,12 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
                   <div className="flex flex-col gap-3 mt-4">
                     <button
                       onClick={(e) => handleButtonClick(e, project)}
-                      className="px-4 py-2 border tertiary-border tertiary-text rounded text-sm hover-secondary-bg hover-primary-color transition-colors duration-200"
+                      disabled={activeMobileCard !== project.id}
+                      className={`px-4 py-2 border tertiary-border tertiary-text rounded text-sm transition-colors duration-200 ${
+                        activeMobileCard === project.id
+                          ? "hover-secondary-bg hover-primary-color cursor-pointer"
+                          : "cursor-default"
+                      }`}
                     >
                       View Project
                     </button>
@@ -240,7 +268,12 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
                         onClick={(e) =>
                           handleCaseStudyClick(e, project.caseStudyUrl || "")
                         }
-                        className="px-4 py-2 border tertiary-border tertiary-text rounded text-sm hover-secondary-bg hover-primary-color transition-colors duration-200"
+                        disabled={activeMobileCard !== project.id}
+                        className={`px-4 py-2 border tertiary-border tertiary-text rounded text-sm transition-colors duration-200 ${
+                          activeMobileCard === project.id
+                            ? "hover-secondary-bg hover-primary-color cursor-pointer"
+                            : "cursor-default"
+                        }`}
                       >
                         View Case Study
                       </button>

@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface StrangeCaseStudyProps {
   isInLightbox?: boolean;
@@ -14,6 +15,16 @@ export default function StrangeCaseStudy({
   isInLightbox = false,
   onLightboxClose,
 }: StrangeCaseStudyProps) {
+  const router = useRouter();
+
+  const handleNavigateToPortfolio = () => {
+    // Navigate to the homepage
+    router.push("/");
+
+    // Store in sessionStorage that we should scroll to portfolio
+    sessionStorage.setItem("scrollToPortfolio", "true");
+  };
+
   return (
     <main className="min-h-screen strange-light-bg strange-dark-text">
       {/* Header Section with Mobile Mockups */}
@@ -1149,12 +1160,12 @@ export default function StrangeCaseStudy({
             Back to Portfolio
           </button>
         ) : (
-          <Link
-            href="/#portfolio"
+          <button
+            onClick={handleNavigateToPortfolio}
             className="inline-flex items-center px-8 py-3 bg-yellow-500 text-black rounded font-bold text-lg hover:bg-yellow-600 transition-colors"
           >
             Back to Portfolio
-          </Link>
+          </button>
         )}
       </section>
     </main>

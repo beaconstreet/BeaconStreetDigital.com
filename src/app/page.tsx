@@ -24,6 +24,36 @@ export default function Home() {
     setTimeout(() => setSelectedProject(null), 300); // Clear content after animation
   };
 
+  // Check for scroll instruction on mount
+  useEffect(() => {
+    // Check if we need to scroll to portfolio section
+    const shouldScrollToPortfolio =
+      sessionStorage.getItem("scrollToPortfolio") === "true";
+
+    if (shouldScrollToPortfolio) {
+      // Clear the flag
+      sessionStorage.removeItem("scrollToPortfolio");
+
+      // Give time for the page to fully render
+      setTimeout(() => {
+        // Find the portfolio section
+        const portfolioSection = document.getElementById("portfolio");
+        if (portfolioSection) {
+          // Scroll to the portfolio section
+          portfolioSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 500); // Delay to ensure content is rendered
+    } else if (window.location.hash === "#portfolio") {
+      // Handle direct navigation with hash
+      setTimeout(() => {
+        const portfolioSection = document.getElementById("portfolio");
+        if (portfolioSection) {
+          portfolioSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 500);
+    }
+  }, []);
+
   // Prevent body scrolling when lightbox is open
   useEffect(() => {
     if (isLightboxOpen) {

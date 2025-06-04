@@ -3,7 +3,6 @@
 [![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-000?logo=next.js&logoColor=white)](https://nextjs.org/)
 [![Styled with Tailwind CSS](https://img.shields.io/badge/Styled%20with-Tailwind%20CSS-38B2AC?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://vercel.com/)
-[![Made with 💻+🎨](https://img.shields.io/badge/Made%20with-%F0%9F%92%BB+%F0%9F%8E%A8-ff69b4)](https://beaconstreetdigital.com)
 
 The source code for [beaconstreetdigital.com](https://beaconstreetdigital.com) — my personal site and portfolio. It serves two purposes:
 

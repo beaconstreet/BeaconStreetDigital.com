@@ -6,11 +6,17 @@ import About from "../components/sections/About";
 import Portfolio from "@/components/sections/Portfolio";
 import Contact from "../components/sections/Contact";
 import ProjectLightbox from "@/components/ui/ProjectLightbox";
+import CaseStudyLightbox from "@/components/ui/CaseStudyLightbox";
 import { Project } from "@/lib/projects";
+import { AnimatePresence } from "framer-motion";
 
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [isCaseStudyOpen, setIsCaseStudyOpen] = useState(false);
+  const [activeCaseStudyId, setActiveCaseStudyId] = useState<string | null>(
+    null
+  );
 
   // Function to open the lightbox
   const openLightbox = (project: Project) => {
@@ -22,6 +28,24 @@ export default function Home() {
   const closeLightbox = () => {
     setIsLightboxOpen(false);
     setTimeout(() => setSelectedProject(null), 300); // Clear content after animation
+  };
+
+  // Function to handle case study clicks from ProjectLightbox
+  const handleCaseStudyClick = (caseStudyUrl: string) => {
+    // Check if this is the Strange Strength case study
+    if (caseStudyUrl.includes("strange-strength")) {
+      setActiveCaseStudyId("strange-strength");
+      setIsCaseStudyOpen(true);
+    } else {
+      // For other case studies, open in a new tab
+      window.open(caseStudyUrl, "_blank");
+    }
+  };
+
+  // Function to close the case study lightbox
+  const closeCaseStudy = () => {
+    setIsCaseStudyOpen(false);
+    setTimeout(() => setActiveCaseStudyId(null), 300);
   };
 
   // Check for scroll instruction on mount
@@ -54,32 +78,6 @@ export default function Home() {
     }
   }, []);
 
-  // Prevent body scrolling when lightbox is open
-  useEffect(() => {
-    if (isLightboxOpen) {
-      // Save the current scroll position
-      const scrollY = window.scrollY;
-
-      // Add styles to prevent scrolling
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
-    } else {
-      // Get the scroll position from body top
-      const scrollY = document.body.style.top
-        ? parseInt(document.body.style.top || "0") * -1
-        : 0;
-
-      // Remove styles that prevent scrolling
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-
-      // Restore the scroll position
-      window.scrollTo(0, scrollY);
-    }
-  }, [isLightboxOpen]);
-
   return (
     <div className="relative">
       {/* Hero Section */}
@@ -107,7 +105,19 @@ export default function Home() {
         project={selectedProject}
         isOpen={isLightboxOpen}
         onClose={closeLightbox}
+        onCaseStudyClick={handleCaseStudyClick}
       />
+
+      {/* Add the CaseStudyLightbox component */}
+      <AnimatePresence>
+        {isCaseStudyOpen && (
+          <CaseStudyLightbox
+            isOpen={isCaseStudyOpen}
+            onClose={closeCaseStudy}
+            caseStudyId={activeCaseStudyId}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

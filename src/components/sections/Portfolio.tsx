@@ -101,6 +101,18 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
     }
   };
 
+  // Create a separate handler for ProjectLightbox that doesn't need the event
+  const handleCaseStudyFromLightbox = (caseStudyUrl: string) => {
+    // Check if this is the Strange Strength case study
+    if (caseStudyUrl.includes("strange-strength")) {
+      setActiveCaseStudyId("strange-strength");
+      setIsCaseStudyOpen(true);
+    } else {
+      // For other case studies, open in a new tab
+      window.open(caseStudyUrl, "_blank");
+    }
+  };
+
   // Fix the image error handling types
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const img = e.currentTarget;
@@ -290,6 +302,10 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
         project={null}
         isOpen={isLightboxOpen}
         onClose={handleCloseLightbox}
+        onCaseStudyClick={(caseStudyUrl: string) => {
+          handleCloseLightbox(); // Close the project lightbox first
+          handleCaseStudyFromLightbox(caseStudyUrl); // Use the new handler
+        }}
       />
 
       {/* Add the CaseStudyLightbox component */}

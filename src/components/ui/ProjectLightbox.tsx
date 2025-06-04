@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 // import Image from "next/image";
 import { Project } from "../../lib/projects";
 import { motion } from "framer-motion";
@@ -9,14 +9,53 @@ interface ProjectLightboxProps {
   project: Project | null;
   isOpen: boolean;
   onClose: () => void;
+  onCaseStudyClick?: (caseStudyUrl: string) => void;
 }
 
 export default function ProjectLightbox({
   project,
   isOpen,
   onClose,
+  onCaseStudyClick,
 }: ProjectLightboxProps) {
+  // Add useEffect for body scroll locking
+  useEffect(() => {
+    if (isOpen) {
+      // Save the current scroll position
+      const scrollY = window.scrollY;
+
+      // Add styles to body to prevent scrolling
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflowY = "scroll";
+
+      // Cleanup function to restore scrolling when component unmounts or lightbox closes
+      return () => {
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+        document.body.style.overflowY = "";
+
+        // Restore scroll position
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [isOpen]);
+
   if (!project || !isOpen) return null;
+
+  const handleCaseStudyClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (project.caseStudyUrl && onCaseStudyClick) {
+      onClose();
+      onCaseStudyClick(project.caseStudyUrl);
+    } else if (project.caseStudyUrl) {
+      window.open(project.caseStudyUrl, "_blank");
+    }
+  };
 
   return (
     <motion.div
@@ -94,10 +133,8 @@ export default function ProjectLightbox({
                 {/* Case Study Button */}
                 {project.caseStudyUrl && (
                   <div className="pb-0 pt-2">
-                    <a
-                      href={project.caseStudyUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={handleCaseStudyClick}
                       className="inline-flex items-center px-8 py-3 accent-bg text-white rounded hover:bg-gray-500 transition-colors text-md"
                     >
                       View Case Study
@@ -114,7 +151,7 @@ export default function ProjectLightbox({
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                       </svg>
-                    </a>
+                    </button>
                   </div>
                 )}
 

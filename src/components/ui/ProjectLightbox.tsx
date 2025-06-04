@@ -135,7 +135,7 @@ export default function ProjectLightbox({
                   <div className="pb-0 pt-2">
                     <button
                       onClick={handleCaseStudyClick}
-                      className="inline-flex items-center px-8 py-3 accent-bg text-white rounded hover:bg-gray-500 transition-colors text-md"
+                      className="inline-flex items-center px-8 py-3 accent-bg text-white rounded hover:!bg-black transition-colors text-md cursor-pointer"
                     >
                       View Case Study
                       <svg
@@ -162,7 +162,7 @@ export default function ProjectLightbox({
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center px-8 py-3 bg-gray-500 text-white rounded hover-accent-bg transition-colors text-md"
+                      className="inline-flex items-center px-8 py-3 bg-gray-500 text-white rounded hover:!bg-black transition-colors text-md"
                     >
                       Visit Project
                       <svg

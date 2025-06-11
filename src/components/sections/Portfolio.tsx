@@ -87,13 +87,21 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
     onCardClick(project);
   };
 
-  // Update this function to handle case study button clicks
+  // Update this function to handle both case studies
   const handleCaseStudyClick = (e: React.MouseEvent, caseStudyUrl: string) => {
     e.stopPropagation(); // Prevent the click from bubbling up
 
-    // Check if this is the Strange Strength case study
-    if (caseStudyUrl.includes("strange-strength")) {
-      setActiveCaseStudyId("strange-strength");
+    // Check if this is a case study that should open in lightbox
+    if (
+      caseStudyUrl.includes("strange-strength") ||
+      caseStudyUrl.includes("STDWK")
+    ) {
+      // Extract the case study ID from the URL
+      if (caseStudyUrl.includes("strange-strength")) {
+        setActiveCaseStudyId("strange-strength");
+      } else if (caseStudyUrl.includes("STDWK")) {
+        setActiveCaseStudyId("STDWK");
+      }
       setIsCaseStudyOpen(true);
     } else {
       // For other case studies, open in a new tab
@@ -101,11 +109,19 @@ const Portfolio: React.FC<PortfolioProps> = ({ onCardClick }) => {
     }
   };
 
-  // Create a separate handler for ProjectLightbox that doesn't need the event
+  // Also update the handler for ProjectLightbox
   const handleCaseStudyFromLightbox = (caseStudyUrl: string) => {
-    // Check if this is the Strange Strength case study
-    if (caseStudyUrl.includes("strange-strength")) {
-      setActiveCaseStudyId("strange-strength");
+    // Check if this is a case study that should open in lightbox
+    if (
+      caseStudyUrl.includes("strange-strength") ||
+      caseStudyUrl.includes("STDWK")
+    ) {
+      // Extract the case study ID from the URL
+      if (caseStudyUrl.includes("strange-strength")) {
+        setActiveCaseStudyId("strange-strength");
+      } else if (caseStudyUrl.includes("STDWK")) {
+        setActiveCaseStudyId("STDWK");
+      }
       setIsCaseStudyOpen(true);
     } else {
       // For other case studies, open in a new tab

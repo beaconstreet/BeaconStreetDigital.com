@@ -4,11 +4,15 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 
-// Dynamically import the StrangeCaseStudy component
+// Dynamically import the case study components
 const StrangeCaseStudy = dynamic(
   () => import("@/app/case-studies/strange-strength/page"),
   { ssr: false }
 );
+
+const STDWKCaseStudy = dynamic(() => import("@/app/case-studies/STDWK/page"), {
+  ssr: false,
+});
 
 interface CaseStudyLightboxProps {
   isOpen: boolean;
@@ -92,6 +96,9 @@ export default function CaseStudyLightbox({
         <div className="case-study-content">
           {caseStudyId === "strange-strength" && (
             <StrangeCaseStudy isInLightbox={true} onLightboxClose={onClose} />
+          )}
+          {caseStudyId === "STDWK" && (
+            <STDWKCaseStudy isInLightbox={true} onLightboxClose={onClose} />
           )}
           {/* Add more case studies as needed with additional conditions */}
         </div>

@@ -2,6 +2,7 @@ import { Dosis } from "next/font/google";
 import { Caveat } from "next/font/google";
 import { Knewave } from "next/font/google";
 import { Montserrat } from "next/font/google";
+import { Tilt_Warp } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import type { Metadata } from "next";
@@ -32,6 +33,13 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-montserrat",
+  display: "swap",
+});
+
+const tiltWarp = Tilt_Warp({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-tiltwarp",
   display: "swap",
 });
 
